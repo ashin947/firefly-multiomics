@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "projectId": "d1c30f9b-cc0b-4f63-a093-138f4d8ccbac",
+  "name": "te",
+  "species": "human",
+  "createdAt": "2026-11-11T11:37:25.625Z",
+  "updatedAt": "2026-11-12T16:15:55.227Z",
+  "appVersion": "1.0.0",
+  "status": "analyzed",
+  "dataType": "counts",
+  "dataset": {
+    "matrixSourceFile": "expression.csv",
+    "matrixPath": "data/expression.clean.csv",
+    "rawMatrixPath": "data/expression.raw.csv",
+    "encoding": "utf-8",
+    "delimiter": ",",
+    "geneIdColumn": "gene_id",
+    "geneIdType": "SYMBOL",
+    "duplicateStrategy": "first",
+    "geneCount": 2000,
+    "sampleCount": 24,
+    "samples": [
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S05",
+      "S06",
+      "S07",
+      "S08",
+      "S09",
+      "S10",
+      "S11",
+      "S12",
+      "S13",
+      "S14",
+      "S15",
+      "S16",
+      "S17",
+      "S18",
+      "S19",
+      "S20",
+      "S21",
+      "S22",
+      "S23",
+      "S24"
+    ],
+    "groupColumn": "group",
+    "sampleColumn": "sample",
+    "groups": {
+      "Tumor": [
+        "S01",
+        "S02",
+        "S03",
+        "S04",
+        "S05",
+        "S06",
+        "S07",
+        "S08",
+        "S09",
+        "S10",
+        "S11",
+        "S12"
+      ],
+      "Normal": [
+        "S13",
+        "S14",
+        "S15",
+        "S16",
+        "S17",
+        "S18",
+        "S19",
+        "S20",
+        "S21",
+        "S22",
+        "S23",
+        "S24"
+      ]
+    },
+    "naRatio": 0,
+    "allZeroGeneCount": 0,
+    "issues": [],
+    "hasBlockingIssue": false
+  },
+  "analyses": [
+    {
+      "id": "ana-20261111T215130-7rg5",
+      "method": "edger",
+      "label": "edgeR（QL F-test） · Tumor vs Normal",
+      "config": {
+        "method": "edger",
+        "dataType": "counts",
+        "contrast": {
+          "groupColumn": "group",
+          "numerator": "Tumor",
+          "denominator": "Normal"
+        },
+        "filter": {
+          "enabled": true,
+          "mode": "filterByExpr",
+          "minCount": 10,
+          "minSamplesPct": 30
+        },
+        "fdrMethod": "BH",
+        "outputGeneName": true,
+        "keepAllGenes": false,
+        "inputIsLog2": false,
+        "priorCount": 2
+      },
+      "resultPath": "results/de/run-20261111T215128-n9rq/de.csv",
+      "stats": {
+        "totalGenesAfterFilter": 1400,
+        "upCount": 76,
+        "downCount": 47,
+        "nsCount": 1277,
+        "filteredOutCount": 600
+      },
+      "thresholds": {
+        "logFC": 1,
+        "fdr": 0.05
+      },
+      "durationMs": 2001,
+      "createdAt": "2026-11-11T13:51:30.160Z",
+      "rLogPath": "logs/run-20261111T215128-n9rq.log"
+    },
+    {
+      "id": "ana-20261113T001555-lgvm",
+      "method": "limma-voom",
+      "label": "limma + voom（counts 推荐） · Tumor vs Normal",
+      "config": {
+        "method": "limma-voom",
+        "dataType": "counts",
+        "contrast": {
+          "groupColumn": "group",
+          "numerator": "Tumor",
+          "denominator": "Normal"
+        },
+        "filter": {
+          "enabled": true,
+          "mode": "filterByExpr",
+          "minCount": 10,
+          "minSamplesPct": 30
+        },
+        "fdrMethod": "BH",
+        "outputGeneName": true,
+        "keepAllGenes": false,
+        "inputIsLog2": false,
+        "priorCount": 2
+      },
+      "resultPath": "results/de/run-20261113T001554-fu55/de.csv",
+      "stats": {
+        "totalGenesAfterFilter": 1400,
+        "upCount": 75,
+        "downCount": 48,
+        "nsCount": 1277,
+        "filteredOutCount": 600
+      },
+      "thresholds": {
+        "logFC": 1,
+        "fdr": 0.05
+      },
+      "durationMs": 1038,
+      "createdAt": "2026-11-12T16:15:55.225Z",
+      "rLogPath": "logs/run-20261113T001554-fu55.log"
+    }
+  ],
+  "activeAnalysisId": "ana-20261113T001555-lgvm",
+  "enrichRuns": [],
+  "plots": {},
+  "lastRun": {
+    "runId": "run-20261113T001554-fu55",
+    "startedAt": "2026-11-12T16:15:54.168Z",
+    "finishedAt": "2026-11-12T16:15:55.225Z",
+    "status": "success"
+  }
+}

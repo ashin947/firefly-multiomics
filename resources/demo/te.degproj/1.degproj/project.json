@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "projectId": "8263cccf-dd0c-4899-a3c0-c71b54b02121",
+  "name": "1",
+  "species": "human",
+  "createdAt": "2026-11-11T13:42:39.016Z",
+  "updatedAt": "2026-11-11T13:42:39.016Z",
+  "appVersion": "1.0.0",
+  "status": "imported",
+  "dataType": "counts",
+  "analyses": [],
+  "enrichRuns": [],
+  "plots": {}
+}

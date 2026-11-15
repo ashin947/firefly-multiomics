@@ -1,0 +1,3 @@
+@@DEG@@ {"v":1,"type":"log","seq":1,"ts":1794412520621,"level":"info","msg":"font registration skipped (skipFonts=true)"}
+@@DEG@@ {"v":1,"type":"hello","seq":2,"ts":1794412520623,"script":"enrich/run_ora.R","rVersion":"4.3.2","pid":23376}
+@@DEG@@ {"v":1,"type":"error","seq":3,"ts":1794412520696,"code":"E_RT_ANNOTATION_MISSING","message":"水稻没有可用的内置注释：Bioconductor 未提供 org.Os.eg.db，内置背景依赖随包注释表 resources/annot/rice_go.tsv / rice_pathway.tsv，当前安装包里没有这两个文件。请在「背景来源」里选择「自定义文件」并指定水稻注释（每行：基因ID<TAB>term<TAB>term...），或改用人类/小鼠。"}

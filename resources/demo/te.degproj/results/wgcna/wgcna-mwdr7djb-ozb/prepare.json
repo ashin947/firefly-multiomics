@@ -1,0 +1,323 @@
+{
+  "wgcnaId": "wgcna-mwdr7djb-ozb",
+  "runDir": "D:\\ai\\shengxin\\resources\\demo\\te.degproj\\results\\wgcna\\wgcna-mwdr7djb-ozb",
+  "nGenesInput": 2500,
+  "nGenesUsed": 625,
+  "nSamples": 24,
+  "nSamplesRemoved": 0,
+  "transformUsed": "none",
+  "varianceCutoff": 0.661613269927536,
+  "traits": [
+    "group",
+    "stage"
+  ],
+  "unmatchedSamples": 0,
+  "powers": [
+    {
+      "power": 1,
+      "signedR2": -0.983719429934142,
+      "slope": 8.38862104675515,
+      "meanK": 461.583323926111,
+      "medianK": 469.592592349818,
+      "maxK": 513.44790739151
+    },
+    {
+      "power": 2,
+      "signedR2": -0.954832317902215,
+      "slope": 3.81223827283761,
+      "meanK": 353.339015135378,
+      "medianK": 362.058128174951,
+      "maxK": 431.457855653147
+    },
+    {
+      "power": 3,
+      "signedR2": -0.946895907470378,
+      "slope": 2.23455874102969,
+      "meanK": 278.632416568435,
+      "medianK": 285.766924103147,
+      "maxK": 369.840336503288
+    },
+    {
+      "power": 4,
+      "signedR2": -0.885270351194348,
+      "slope": 1.45504210576538,
+      "meanK": 225.390751094842,
+      "medianK": 228.324355233627,
+      "maxK": 322.893147329915
+    },
+    {
+      "power": 5,
+      "signedR2": -0.783456833407756,
+      "slope": 1.00172506772519,
+      "meanK": 186.31993520248,
+      "medianK": 186.147184525678,
+      "maxK": 285.84579857582
+    },
+    {
+      "power": 6,
+      "signedR2": -0.574735060361871,
+      "slope": 0.69388606864987,
+      "meanK": 156.878240772193,
+      "medianK": 154.245311472569,
+      "maxK": 256.04924688977
+    },
+    {
+      "power": 7,
+      "signedR2": -0.40971991293719,
+      "slope": 0.483222002384273,
+      "meanK": 134.156837159539,
+      "medianK": 130.060279120288,
+      "maxK": 231.688052638485
+    },
+    {
+      "power": 8,
+      "signedR2": -0.207049356483506,
+      "slope": 0.283008858675261,
+      "meanK": 116.243004646995,
+      "medianK": 110.553445556323,
+      "maxK": 211.479395599822
+    },
+    {
+      "power": 9,
+      "signedR2": -0.0698819572270584,
+      "slope": 0.141401411616161,
+      "meanK": 101.847776180419,
+      "medianK": 95.1453238212306,
+      "maxK": 194.494305359029
+    },
+    {
+      "power": 10,
+      "signedR2": -0.000242071153416267,
+      "slope": 0.00731434957025717,
+      "meanK": 90.0824601915195,
+      "medianK": 82.6224686462417,
+      "maxK": 180.046564719219
+    },
+    {
+      "power": 12,
+      "signedR2": 0.159586794248997,
+      "slope": -0.203852502777049,
+      "meanK": 72.1143839111018,
+      "medianK": 63.5421309280278,
+      "maxK": 156.824989165415
+    },
+    {
+      "power": 14,
+      "signedR2": 0.323763713899646,
+      "slope": -0.335917150946879,
+      "meanK": 59.1326406869088,
+      "medianK": 50.1499761726923,
+      "maxK": 139.370824166441
+    },
+    {
+      "power": 16,
+      "signedR2": 0.449357807489299,
+      "slope": -0.475674652194431,
+      "meanK": 49.3764513239028,
+      "medianK": 40.3031365525332,
+      "maxK": 125.887996986961
+    },
+    {
+      "power": 18,
+      "signedR2": 0.582616233280097,
+      "slope": -0.593437164646199,
+      "meanK": 41.8154694860225,
+      "medianK": 32.9046269741007,
+      "maxK": 114.882818438052
+    },
+    {
+      "power": 20,
+      "signedR2": 0.699401384724751,
+      "slope": -0.710153077724463,
+      "meanK": 35.8126446633191,
+      "medianK": 26.7274525747016,
+      "maxK": 105.66230523208
+    }
+  ],
+  "recommendedPower": null,
+  "plots": [
+    {
+      "id": "sampleTree",
+      "title": "Sample clustering to detect outliers",
+      "caption": "样本层次聚类树。看是否存在与其它样本距离明显拉开的离群样本；如有，可回到第一步设置剪切高度把它们剔除后重跑。",
+      "file": "p01_sample_tree.png",
+      "pdf": "p01_sample_tree.pdf"
+    },
+    {
+      "id": "scaleIndependence",
+      "title": "Scale independence",
+      "caption": "无标度拓扑拟合指数随软阈值 β 的变化。红线是 R²=0.85 的经验门槛，蓝虚线是系统推荐的 β；通常取第一个越过 0.85 的幂次。",
+      "file": "p02_scale_independence.png",
+      "pdf": "p02_scale_independence.pdf"
+    },
+    {
+      "id": "meanConnectivity",
+      "title": "Mean connectivity",
+      "caption": "平均连接度随 β 的变化。β 越大连接度越低；结合 R² 曲线选一个既满足无标度、连接度又不至于过低的幂次。",
+      "file": "p03_mean_connectivity.png",
+      "pdf": "p03_mean_connectivity.pdf"
+    }
+  ],
+  "summary": {
+    "wgcnaId": "wgcna-mwdr7djb-ozb",
+    "runDir": "D:\\ai\\shengxin\\resources\\demo\\te.degproj\\results\\wgcna\\wgcna-mwdr7djb-ozb",
+    "nGenesInput": 2500,
+    "nGenesUsed": 625,
+    "nSamples": 24,
+    "nSamplesRemoved": 0,
+    "transformUsed": "none",
+    "varianceCutoff": 0.661613269927536,
+    "traits": [
+      "group",
+      "stage"
+    ],
+    "unmatchedSamples": 0,
+    "powers": [
+      {
+        "power": 1,
+        "signedR2": -0.983719429934142,
+        "slope": 8.38862104675515,
+        "meanK": 461.583323926111,
+        "medianK": 469.592592349818,
+        "maxK": 513.44790739151
+      },
+      {
+        "power": 2,
+        "signedR2": -0.954832317902215,
+        "slope": 3.81223827283761,
+        "meanK": 353.339015135378,
+        "medianK": 362.058128174951,
+        "maxK": 431.457855653147
+      },
+      {
+        "power": 3,
+        "signedR2": -0.946895907470378,
+        "slope": 2.23455874102969,
+        "meanK": 278.632416568435,
+        "medianK": 285.766924103147,
+        "maxK": 369.840336503288
+      },
+      {
+        "power": 4,
+        "signedR2": -0.885270351194348,
+        "slope": 1.45504210576538,
+        "meanK": 225.390751094842,
+        "medianK": 228.324355233627,
+        "maxK": 322.893147329915
+      },
+      {
+        "power": 5,
+        "signedR2": -0.783456833407756,
+        "slope": 1.00172506772519,
+        "meanK": 186.31993520248,
+        "medianK": 186.147184525678,
+        "maxK": 285.84579857582
+      },
+      {
+        "power": 6,
+        "signedR2": -0.574735060361871,
+        "slope": 0.69388606864987,
+        "meanK": 156.878240772193,
+        "medianK": 154.245311472569,
+        "maxK": 256.04924688977
+      },
+      {
+        "power": 7,
+        "signedR2": -0.40971991293719,
+        "slope": 0.483222002384273,
+        "meanK": 134.156837159539,
+        "medianK": 130.060279120288,
+        "maxK": 231.688052638485
+      },
+      {
+        "power": 8,
+        "signedR2": -0.207049356483506,
+        "slope": 0.283008858675261,
+        "meanK": 116.243004646995,
+        "medianK": 110.553445556323,
+        "maxK": 211.479395599822
+      },
+      {
+        "power": 9,
+        "signedR2": -0.0698819572270584,
+        "slope": 0.141401411616161,
+        "meanK": 101.847776180419,
+        "medianK": 95.1453238212306,
+        "maxK": 194.494305359029
+      },
+      {
+        "power": 10,
+        "signedR2": -0.000242071153416267,
+        "slope": 0.00731434957025717,
+        "meanK": 90.0824601915195,
+        "medianK": 82.6224686462417,
+        "maxK": 180.046564719219
+      },
+      {
+        "power": 12,
+        "signedR2": 0.159586794248997,
+        "slope": -0.203852502777049,
+        "meanK": 72.1143839111018,
+        "medianK": 63.5421309280278,
+        "maxK": 156.824989165415
+      },
+      {
+        "power": 14,
+        "signedR2": 0.323763713899646,
+        "slope": -0.335917150946879,
+        "meanK": 59.1326406869088,
+        "medianK": 50.1499761726923,
+        "maxK": 139.370824166441
+      },
+      {
+        "power": 16,
+        "signedR2": 0.449357807489299,
+        "slope": -0.475674652194431,
+        "meanK": 49.3764513239028,
+        "medianK": 40.3031365525332,
+        "maxK": 125.887996986961
+      },
+      {
+        "power": 18,
+        "signedR2": 0.582616233280097,
+        "slope": -0.593437164646199,
+        "meanK": 41.8154694860225,
+        "medianK": 32.9046269741007,
+        "maxK": 114.882818438052
+      },
+      {
+        "power": 20,
+        "signedR2": 0.699401384724751,
+        "slope": -0.710153077724463,
+        "meanK": 35.8126446633191,
+        "medianK": 26.7274525747016,
+        "maxK": 105.66230523208
+      }
+    ],
+    "recommendedPower": null,
+    "plots": [
+      {
+        "id": "sampleTree",
+        "title": "Sample clustering to detect outliers",
+        "caption": "样本层次聚类树。看是否存在与其它样本距离明显拉开的离群样本；如有，可回到第一步设置剪切高度把它们剔除后重跑。",
+        "file": "p01_sample_tree.png",
+        "pdf": "p01_sample_tree.pdf"
+      },
+      {
+        "id": "scaleIndependence",
+        "title": "Scale independence",
+        "caption": "无标度拓扑拟合指数随软阈值 β 的变化。红线是 R²=0.85 的经验门槛，蓝虚线是系统推荐的 β；通常取第一个越过 0.85 的幂次。",
+        "file": "p02_scale_independence.png",
+        "pdf": "p02_scale_independence.pdf"
+      },
+      {
+        "id": "meanConnectivity",
+        "title": "Mean connectivity",
+        "caption": "平均连接度随 β 的变化。β 越大连接度越低；结合 R² 曲线选一个既满足无标度、连接度又不至于过低的幂次。",
+        "file": "p03_mean_connectivity.png",
+        "pdf": "p03_mean_connectivity.pdf"
+      }
+    ],
+    "durationMs": 10711
+  }
+}

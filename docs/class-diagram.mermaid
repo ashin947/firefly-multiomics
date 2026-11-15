@@ -1,0 +1,283 @@
+%% DEG Studio v1.0 · 核心类图
+%% 对应 docs/ARCHITECTURE.md §4
+%% 说明：只画「有行为」的服务类与跨进程契约；纯数据结构用 interface 标注在末尾注释里
+
+classDiagram
+    direction LR
+
+    %% ============ 主进程：基础设施 ============
+    class PathService {
+        +isDev: boolean
+        +getResourcesRoot() string
+        +getRRuntimeRoot() string
+        +getRlibsRoot() string
+        +getRFontPath() string
+        +getRScriptsRoot() string
+        +getRscriptBinary(root?) string
+        +getProbeCachePath() string
+        +getTempDir() string
+        +getMainLogDir() string
+        +resolveInProject(projectRoot, rel) string
+    }
+
+    class Logger {
+        +info(scope, msg, meta?)
+        +warn(scope, msg, meta?)
+        +error(scope, msg, meta?)
+        +ringBuffer() LogLine[]
+        +flush() void
+    }
+
+    %% ============ 主进程：R 运行时 ============
+    class RRuntimeResolver {
+        -cache: RuntimeProbeCache
+        +resolve(opts?) Promise~RRuntimeInfo~
+        +candidates() Candidate[]
+        +probe(rscriptPath) Promise~RuntimeProbeResult~
+        +invalidate() void
+        -checkVersion(v) boolean
+    }
+
+    class RRuntimeProbe {
+        +run(rscriptPath) Promise~RuntimeProbeResult~
+        +readManifest() PackageManifest
+    }
+
+    %% ============ 主进程：进程管理 ============
+    class ChildProcessManager {
+        -map: Map~string, ChildRecord~
+        +register(runId, child) void
+        +kill(runId) Promise~boolean~
+        +killAll() Promise~void~
+        +has(runId) boolean
+    }
+
+    class RProcessRunner {
+        -lastPct: Map~string, number~
+        +run(opts: RunROptions) Promise~RunRResult~
+        -parseStdout(runId, chunk) void
+        -fallbackFromEventsJsonl(runDir) ProtocolMessage[]
+        -buildRenv() NodeJS.ProcessEnv
+    }
+
+    class RErrorTranslator {
+        +translate(ctx: TranslateContext) AppError
+        -rules: ErrorRule[]
+    }
+
+    %% ============ 主进程：项目 ============
+    class ProjectService {
+        -store: ProjectStore
+        +create(input) Promise~ProjectMeta~
+        +open(dir) Promise~OpenResult~
+        +save(patch) Promise~ProjectMeta~
+        +close() Promise~void~
+        -atomicWriteJson(path, obj) Promise~void~
+    }
+
+    class ProjectStore {
+        -current: ProjectMeta | null
+        +get() ProjectMeta | null
+        +patch(p: Partial~ProjectMeta~) void
+        +subscribe(fn) Unsubscribe
+    }
+
+    class ProjectSchema {
+        <<static>>
+        +validate(raw) ProjectMeta
+        +migrate(raw) ProjectMeta
+    }
+
+    %% ============ 主进程：数据 ============
+    class FileSniffer {
+        +sniff(filePath) Promise~SniffResult~
+    }
+
+    class MatrixImporter {
+        +parse(filePath, sniff) Promise~ImportMatrixResult~
+        +setGeneIdColumn(col) Promise~ImportMatrixResult~
+        +aggregateDuplicates(strategy) Promise~ImportMatrixResult~
+        -writeCleanCsv(rows) Promise~void~
+    }
+
+    class GroupImporter {
+        +parse(filePath, mapping?) Promise~GroupParseResult~
+    }
+
+    class DataValidator {
+        +validate(input) Issue[]
+        +estimateMemory(rows, cols) MemoryRisk
+    }
+
+    class GeneIdResolver {
+        +resolve(target) Promise~GeneIdMap~
+        -cache: GeneIdMap | null
+    }
+
+    %% ============ 主进程：分析 ============
+    class AnalysisRegistry {
+        -modules: Map~string, AnalysisModule~
+        +register(module) void
+        +get(id) AnalysisModule
+        +list(category?) AnalysisModule[]
+        +schemas(ctx) FormSchemaDto[]
+    }
+
+    class AnalysisModule {
+        <<interface>>
+        +id: AnalysisMethodId
+        +label: string
+        +category: 'de'|'enrich'|'gsea'
+        +formSchema: FormFieldSchema[]
+        +rScript: string
+        +outputs: ArtifactSpec[]
+        +availability(ctx) Availability
+        +buildRunConfig(config, ctx) unknown
+        +loadResult(runDir) Promise~unknown[]~
+    }
+
+    class AnalysisRunner {
+        +run(method, config) Promise~RunOutcome~
+        -preflight(module, config) Issue[]
+        -prepareRunDir(runId) string
+    }
+
+    class ResultLoader {
+        +loadDeTable(path) Promise~DEResultRow[]~
+        +loadEnrichTable(path) Promise~EnrichResultRow[]~
+        +loadPlotPayload(path, type) Promise~PlotPayload~
+    }
+
+    %% ============ 主进程：绘图与导出 ============
+    class PlotService {
+        +compute(type, config, analysisId) Promise~PlotPayload~
+        +export(type, config, outDir) Promise~ExportResult~
+        -cacheKey(type, config) string
+    }
+
+    class PlotTheme {
+        +load() PlotThemeSpec
+        +toJson() string
+    }
+
+    class TableExporter {
+        +toCsv(rows, path) Promise~void~
+        +toExcel(rows, path, columns) Promise~void~
+    }
+
+    class FigureExporter {
+        +exportOne(spec) Promise~string[]~
+        +exportAll(outDir) Promise~string[]~
+    }
+
+    %% ============ 主进程：IPC ============
+    class IpcRegistry {
+        +handle(channel, schema, fn) void
+        +emit(channel, payload) void
+        -wrap(fn) IpcResult
+    }
+
+    %% ============ 渲染进程 ============
+    class ThresholdFilter {
+        <<hook: useThresholdFilter>>
+        +filtered: DEResultRow[]
+        +stats: DEStats
+        +isSignificant(row, t) boolean
+    }
+
+    class RuntimeStore {
+        +info: RRuntimeInfo | null
+        +probe(force?) Promise~void~
+    }
+
+    class ProjectStoreUI {
+        +meta: ProjectMeta | null
+        +open(dir) Promise~void~
+        +save() Promise~void~
+    }
+
+    class DatasetStore {
+        +summary: DatasetSummary | null
+        +preview: PreviewTable | null
+        +expression: ExpressionPayload | null
+        +issues: Issue[]
+    }
+
+    class AnalysisStore {
+        +status: RunStatus | 'idle'
+        +runId: string | null
+        +stage: Stage | null
+        +pct: number
+        +logs: LogLine[]
+        +rows: DEResultRow[]
+        +run(method, config) Promise~void~
+        +cancel() Promise~void~
+    }
+
+    class ThresholdStore {
+        +logFC: number
+        +fdr: number
+        +setLogFC(v) void
+        +setFdr(v) void
+    }
+
+    class PlotStore {
+        +configs: Record~PlotType, PlotConfig~
+        +payloads: Record~PlotType, PlotPayload~
+        +compute(type) Promise~void~
+        +export(type) Promise~void~
+    }
+
+    %% ============ 关系 ============
+    PathService --> RRuntimeResolver : 提供路径
+    Logger <-- RRuntimeResolver : 记录
+    RRuntimeResolver --> RRuntimeProbe : 委托自检
+    RRuntimeProbe --> RProcessRunner : spawn check_runtime.R
+    RProcessRunner --> ChildProcessManager : 注册/终止
+    RProcessRunner --> RErrorTranslator : 失败时翻译
+    RProcessRunner --> PathService : 解析 Rscript/脚本路径
+    RRuntimeResolver --> ChildProcessManager : 通过 runner
+
+    ProjectService --> ProjectStore : 内存态
+    ProjectService --> ProjectSchema : 校验/迁移
+    ProjectService --> PathService : 项目路径
+
+    MatrixImporter --> FileSniffer : 嗅探编码/分隔符
+    MatrixImporter --> DataValidator : 产出 Issue
+    GroupImporter --> DataValidator
+    GeneIdResolver --> RProcessRunner : map_gene_ids.R
+
+    AnalysisRegistry o-- AnalysisModule : 注册表持有
+    AnalysisRunner --> AnalysisRegistry : 按 method 取模块
+    AnalysisRunner --> RProcessRunner : 执行 R
+    AnalysisRunner --> ResultLoader : 加载产物
+    AnalysisRunner --> ProjectService : 落盘快照
+    AnalysisRunner --> IpcRegistry : 推送事件
+
+    PlotService --> RProcessRunner : compute/export 脚本
+    PlotService --> PlotTheme : 主题契约
+    PlotService --> ResultLoader : 读结果
+    FigureExporter --> PlotService
+    TableExporter --> PathService
+
+    IpcRegistry --> ProjectService
+    IpcRegistry --> MatrixImporter
+    IpcRegistry --> AnalysisRunner
+    IpcRegistry --> PlotService
+    IpcRegistry --> RRuntimeResolver
+
+    RuntimeStore ..> IpcRegistry : invoke deg:runtime:probe
+    ProjectStoreUI ..> IpcRegistry : invoke deg:project:*
+    DatasetStore ..> IpcRegistry : invoke deg:data:*
+    AnalysisStore ..> IpcRegistry : invoke deg:analysis:*
+    AnalysisStore ..> IpcRegistry : on deg:event:analysis*
+    PlotStore ..> IpcRegistry : invoke deg:plot:*
+
+    ThresholdStore --> ThresholdFilter : 输入阈值
+    AnalysisStore --> ThresholdFilter : 输入全量 rows
+    ThresholdFilter --> PlotStore : 显著点集合
+
+    note for AnalysisModule "★ GSEA 扩展点：新增模块 = 实现本接口 + 1 个 R 脚本 + registry.register()\nAnalysisRunner / IPC / 前端表单渲染 零改动"
+    note for RProcessRunner "★ stdout 行协议 @@DEG@@ {json}\n兜底：runDir/events.jsonl 重放"
+    note for ChildProcessManager "★ Windows: taskkill /pid <pid> /T /F\nPOSIX: process.kill(-pid, SIGKILL)"
+    note for ThresholdFilter "★ 纯前端重算，不重跑 R\n谓词与 export_volcano.R 必须逐字一致"

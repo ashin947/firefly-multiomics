@@ -1,0 +1,52 @@
+{
+  "runId": "enr-mwcavtwq-lom",
+  "runDir": "D:\\ai\\shengxin\\resources\\demo\\te.degproj\\results\\enrich\\enr-mwcavtwq-lom",
+  "projectRoot": "D:\\ai\\shengxin\\resources\\demo\\te.degproj",
+  "params": {
+    "geneList": [
+      "TP53",
+      "EGFR",
+      "MYC",
+      "KRAS",
+      "BRCA1",
+      "BRCA2",
+      "PTEN",
+      "RB1",
+      "CDKN2A",
+      "ALK",
+      "MET",
+      "ERBB2",
+      "PIK3CA",
+      "APC",
+      "VHL",
+      "NF1",
+      "SMAD4",
+      "CTNNB1",
+      "JAK2",
+      "STAT3",
+      "GAPDH",
+      "ACTB",
+      "TUBB",
+      "HPRT1",
+      "B2M",
+      "TBP",
+      "RPLP0",
+      "PPIA",
+      "GUSB",
+      "TFRC"
+    ],
+    "species": "rice",
+    "geneIdType": "SYMBOL",
+    "databases": [
+      "GO",
+      "KEGG"
+    ],
+    "ontology": "ALL",
+    "pvalueCutoff": 0.05,
+    "qvalueCutoff": 0.05,
+    "customGoPath": "",
+    "customPathwayPath": "",
+    "customTermPrefix": "",
+    "skipFonts": true
+  }
+}

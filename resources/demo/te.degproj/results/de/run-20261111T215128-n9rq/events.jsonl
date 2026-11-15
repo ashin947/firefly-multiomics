@@ -1,0 +1,24 @@
+@@DEG@@ {"v":1,"type":"log","seq":1,"ts":1794405088677,"level":"info","msg":"registered CJK font: C:/Windows/Fonts/msyh.ttc"}
+@@DEG@@ {"v":1,"type":"hello","seq":2,"ts":1794405088680,"script":"de/run_edger.R","rVersion":"4.3.2","pid":3868}
+@@DEG@@ {"v":1,"type":"progress","seq":3,"ts":1794405089204,"stage":"read","pct":3,"msg":"reading expression matrix"}
+@@DEG@@ {"v":1,"type":"log","seq":4,"ts":1794405089226,"level":"info","msg":"expression matrix: 2000 genes x 24 samples"}
+@@DEG@@ {"v":1,"type":"progress","seq":5,"ts":1794405089227,"stage":"read","pct":15,"msg":"reading groups table"}
+@@DEG@@ {"v":1,"type":"log","seq":6,"ts":1794405089238,"level":"info","msg":"groups: Tumor(12), Normal(12)"}
+@@DEG@@ {"v":1,"type":"log","seq":7,"ts":1794405089259,"level":"info","msg":"contrast: `Tumor` - `Normal`  (logFC > 0 => up in Tumor)"}
+@@DEG@@ {"v":1,"type":"log","seq":8,"ts":1794405089276,"level":"info","msg":"filterByExpr applied"}
+@@DEG@@ {"v":1,"type":"progress","seq":9,"ts":1794405089277,"stage":"filter","pct":25,"msg":"1400 genes kept (600 filtered out)"}
+@@DEG@@ {"v":1,"type":"progress","seq":10,"ts":1794405089278,"stage":"normalize","pct":28,"msg":"building DGEList"}
+@@DEG@@ {"v":1,"type":"progress","seq":11,"ts":1794405089287,"stage":"normalize","pct":32,"msg":"calculating TMM normalization factors"}
+@@DEG@@ {"v":1,"type":"progress","seq":12,"ts":1794405089327,"stage":"normalize","pct":40,"msg":"normalization factors estimated"}
+@@DEG@@ {"v":1,"type":"progress","seq":13,"ts":1794405089327,"stage":"dispersion","pct":42,"msg":"estimating common/trended/tagwise dispersions"}
+@@DEG@@ {"v":1,"type":"progress","seq":14,"ts":1794405089932,"stage":"dispersion","pct":55,"msg":"dispersion estimated"}
+@@DEG@@ {"v":1,"type":"progress","seq":15,"ts":1794405089933,"stage":"fit","pct":58,"msg":"fitting quasi-likelihood GLM"}
+@@DEG@@ {"v":1,"type":"progress","seq":16,"ts":1794405089973,"stage":"fit","pct":75,"msg":"model fitted"}
+@@DEG@@ {"v":1,"type":"progress","seq":17,"ts":1794405089973,"stage":"test","pct":78,"msg":"running quasi-likelihood F-test"}
+@@DEG@@ {"v":1,"type":"progress","seq":18,"ts":1794405090003,"stage":"test","pct":90,"msg":"1400 genes tested"}
+@@DEG@@ {"v":1,"type":"progress","seq":19,"ts":1794405090033,"stage":"write","pct":92,"msg":"writing de.csv"}
+@@DEG@@ {"v":1,"type":"log","seq":20,"ts":1794405090057,"level":"info","msg":"regulation thresholds: |logFC| >= 1 & FDR < 0.05 -> up=76 down=47 ns=1277"}
+@@DEG@@ {"v":1,"type":"artifact","seq":21,"ts":1794405090100,"kind":"de_table","path":"de.csv","rows":1400,"schema":"DEResultRow[]"}
+@@DEG@@ {"v":1,"type":"artifact","seq":22,"ts":1794405090104,"kind":"de_table","path":"de.json","rows":1400,"schema":"DEResultRow[]"}
+@@DEG@@ {"v":1,"type":"progress","seq":23,"ts":1794405090106,"stage":"write","pct":100,"msg":"done"}
+@@DEG@@ {"v":1,"type":"result","seq":24,"ts":1794405090107,"ok":true,"summary":{"genesAfterFilter":1400,"up":76,"down":47,"ns":1277,"filteredOut":600,"durationMs":938,"contrast":"Tumor","logFCThreshold":1,"fdrThreshold":0.05}}

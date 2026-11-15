@@ -1,0 +1,15 @@
+{
+  "runId": "wgcna-mwdr7djb-ozb",
+  "runDir": "D:\\ai\\shengxin\\resources\\demo\\te.degproj\\results\\wgcna\\wgcna-mwdr7djb-ozb",
+  "projectRoot": "D:\\ai\\shengxin\\resources\\demo\\te.degproj",
+  "params": {
+    "wgcnaId": "wgcna-mwdr7djb-ozb",
+    "matrixPath": "D:\\ai\\shengxin\\docs\\demo\\wgcna-demo-expression.tsv",
+    "traitPath": "D:\\ai\\shengxin\\docs\\demo\\wgcna-demo-trait.txt",
+    "varianceFilter": "top25",
+    "transform": "none",
+    "sampleCutHeight": null,
+    "minSamples": 8,
+    "skipFonts": true
+  }
+}

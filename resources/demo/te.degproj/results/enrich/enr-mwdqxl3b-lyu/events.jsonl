@@ -1,0 +1,9 @@
+@@DEG@@ {"v":1,"type":"log","seq":1,"ts":1794499942544,"level":"info","msg":"font registration skipped (skipFonts=true)"}
+@@DEG@@ {"v":1,"type":"hello","seq":2,"ts":1794499942546,"script":"enrich/run_ora.R","rVersion":"4.3.2","pid":16708}
+@@DEG@@ {"v":1,"type":"log","seq":3,"ts":1794499942631,"level":"info","msg":"input genes: 123  species=human  idType=SYMBOL  db=GO+KEGG  custom=no"}
+@@DEG@@ {"v":1,"type":"progress","seq":4,"ts":1794499946743,"stage":"read","pct":15,"msg":"preparing gene list"}
+@@DEG@@ {"v":1,"type":"progress","seq":5,"ts":1794499946813,"stage":"read","pct":25,"msg":"mapping gene ids"}
+@@DEG@@ {"v":1,"type":"log","seq":6,"ts":1794499947105,"level":"info","msg":"mapped to ENTREZ: 24 / 123"}
+@@DEG@@ {"v":1,"type":"progress","seq":7,"ts":1794499947106,"stage":"enrich","pct":40,"msg":"GO enrichment (ALL)"}
+@@DEG@@ {"v":1,"type":"progress","seq":8,"ts":1794499985437,"stage":"enrich","pct":60,"msg":"KEGG enrichment"}
+@@DEG@@ {"v":1,"type":"error","seq":9,"ts":1794500045458,"code":"E_KEGG_NETWORK","message":"KEGG enrichment failed (needs network to fetch KEGG data): cannot read from connection"}

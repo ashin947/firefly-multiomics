@@ -1,0 +1,63 @@
+{
+  "runId": "run-20261111T215128-n9rq",
+  "method": "edger",
+  "label": "edgeR（QL F-test） · Tumor vs Normal",
+  "config": {
+    "method": "edger",
+    "dataType": "counts",
+    "contrast": {
+      "groupColumn": "group",
+      "numerator": "Tumor",
+      "denominator": "Normal"
+    },
+    "filter": {
+      "enabled": true,
+      "mode": "filterByExpr",
+      "minCount": 10,
+      "minSamplesPct": 30
+    },
+    "fdrMethod": "BH",
+    "outputGeneName": true,
+    "keepAllGenes": false,
+    "inputIsLog2": false,
+    "priorCount": 2
+  },
+  "summary": {
+    "genesAfterFilter": 1400,
+    "up": 76,
+    "down": 47,
+    "ns": 1277,
+    "filteredOut": 600,
+    "durationMs": 938,
+    "contrast": "Tumor",
+    "logFCThreshold": 1,
+    "fdrThreshold": 0.05
+  },
+  "stats": {
+    "totalGenesAfterFilter": 1400,
+    "upCount": 76,
+    "downCount": 47,
+    "nsCount": 1277,
+    "filteredOutCount": 600
+  },
+  "thresholds": {
+    "logFC": 1,
+    "fdr": 0.05
+  },
+  "durationMs": 2001,
+  "startedAt": "2026-11-11T13:51:28.133Z",
+  "finishedAt": "2026-11-11T13:51:30.160Z",
+  "usedFallback": false,
+  "artifacts": [
+    {
+      "kind": "de_table",
+      "path": "de.csv",
+      "rows": 1400
+    },
+    {
+      "kind": "de_table",
+      "path": "de.json",
+      "rows": 1400
+    }
+  ]
+}

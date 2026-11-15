@@ -1,0 +1,409 @@
+{
+  "wgcnaId": "wgcna-mwdr7vh3-kl7",
+  "runDir": "D:\\ai\\shengxin\\resources\\demo\\te.degproj\\results\\wgcna\\wgcna-mwdr7vh3-kl7",
+  "geneCount": 1250,
+  "modules": [
+    {
+      "module": "turquoise",
+      "genes": 644
+    },
+    {
+      "module": "blue",
+      "genes": 159
+    },
+    {
+      "module": "brown",
+      "genes": 154
+    },
+    {
+      "module": "yellow",
+      "genes": 153
+    },
+    {
+      "module": "green",
+      "genes": 140
+    }
+  ],
+  "traitRows": [
+    {
+      "module": "blue",
+      "trait": "group",
+      "cor": -0.0812367292122908,
+      "pvalue": 0.705908852195139,
+      "fdr": 0.705908852195139
+    },
+    {
+      "module": "blue",
+      "trait": "stage",
+      "cor": 0.0812367292122908,
+      "pvalue": 0.705908852195139,
+      "fdr": 0.705908852195139
+    },
+    {
+      "module": "brown",
+      "trait": "group",
+      "cor": 0.107671527385946,
+      "pvalue": 0.61652474194409,
+      "fdr": 0.705908852195139
+    },
+    {
+      "module": "brown",
+      "trait": "stage",
+      "cor": -0.107671527385946,
+      "pvalue": 0.61652474194409,
+      "fdr": 0.705908852195139
+    },
+    {
+      "module": "green",
+      "trait": "group",
+      "cor": -0.274132018236067,
+      "pvalue": 0.194880675486095,
+      "fdr": 0.487201688715238
+    },
+    {
+      "module": "green",
+      "trait": "stage",
+      "cor": 0.274132018236067,
+      "pvalue": 0.194880675486095,
+      "fdr": 0.487201688715238
+    },
+    {
+      "module": "turquoise",
+      "trait": "group",
+      "cor": 0.192699184923143,
+      "pvalue": 0.366987822519613,
+      "fdr": 0.611646370866022
+    },
+    {
+      "module": "turquoise",
+      "trait": "stage",
+      "cor": -0.192699184923143,
+      "pvalue": 0.366987822519613,
+      "fdr": 0.611646370866022
+    },
+    {
+      "module": "yellow",
+      "trait": "group",
+      "cor": 0.882106670992546,
+      "pvalue": 1.2098033302346e-8,
+      "fdr": 6.04901665117299e-8
+    },
+    {
+      "module": "yellow",
+      "trait": "stage",
+      "cor": -0.882106670992546,
+      "pvalue": 1.2098033302346e-8,
+      "fdr": 6.04901665117299e-8
+    }
+  ],
+  "plots": [
+    {
+      "id": "sampleTraitTree",
+      "title": "Sample dendrogram and trait heatmap",
+      "caption": "样本聚类树与性状色条。色条越整齐说明该性状与样本结构越一致；如果某个性状的颜色在树的两大分支间明显分层，后面模块-性状相关通常也会显著。",
+      "file": "p04_sample_trait_tree.png",
+      "pdf": "p04_sample_trait_tree.pdf"
+    },
+    {
+      "id": "scaleFree",
+      "title": "Connectivity distribution and scale-free check",
+      "caption": "左：每个基因的连接度分布；右：log10(p(k)) 对 log10(k) 的拟合，点越贴近直线越接近无标度拓扑。右图明显弯曲说明软阈值偏小。",
+      "file": "p05_scale_free.png",
+      "pdf": "p05_scale_free.pdf"
+    },
+    {
+      "id": "geneTree",
+      "title": "Gene clustering on TOM-based dissimilarity",
+      "caption": "基于 TOM 相异度的基因层次聚类树。分支越靠下越相似；这张图只看整体结构，模块划分看下一张。",
+      "file": "p06_gene_tree.png",
+      "pdf": "p06_gene_tree.pdf"
+    },
+    {
+      "id": "moduleTree",
+      "title": "Gene dendrogram and module colors",
+      "caption": "动态树剪切得到的初始模块（未合并）。色条上方的分支与颜色对应，颜色越连贯说明模块越干净。",
+      "file": "p07_module_tree.png",
+      "pdf": "p07_module_tree.pdf"
+    },
+    {
+      "id": "meTree",
+      "title": "Clustering of module eigengenes",
+      "caption": "模块特征向量的聚类树。红线是合并高度；红线以下相连的模块会被合并成一个（相似模块没有必要分开讲）。",
+      "file": "p08_me_tree.png",
+      "pdf": "p08_me_tree.pdf"
+    },
+    {
+      "id": "mergedTree",
+      "title": "Merged module colors",
+      "caption": "上色条是动态剪枝的初始模块，下色条是合并后的最终模块。两行颜色差别越大，说明合并掉的冗余模块越多。",
+      "file": "p09_merged_tree.png",
+      "pdf": "p09_merged_tree.pdf"
+    },
+    {
+      "id": "tomHeatmap",
+      "title": "Network heatmap plot, selected genes",
+      "caption": "随机抽样的基因间 TOM 热图。对角线上的亮块对应模块：块越黄、边界越清楚，模块划分越可靠。",
+      "file": "p10_tom_heatmap.png",
+      "pdf": "p10_tom_heatmap.pdf"
+    },
+    {
+      "id": "traitHeatmap",
+      "title": "Module-trait relationships",
+      "caption": "模块特征向量与性状的相关性。每格上行是相关系数、括号里是 p 值；颜色越深相关越强，白色接近无关。重点看有没有 |r| 大且 p 小的格子。",
+      "file": "p11_trait_heatmap.png",
+      "pdf": "p11_trait_heatmap.pdf"
+    },
+    {
+      "id": "moduleProfile",
+      "title": "Module profile: turquoise",
+      "caption": "模块 turquoise 内每个基因标准化后的表达（上）与模块特征向量（下）。上图行间越整齐、下图柱形起伏越明显，说明该模块越紧凑、越值得后续做通路富集。",
+      "file": "p12_module_profile.png",
+      "pdf": "p12_module_profile.pdf"
+    }
+  ],
+  "tables": [
+    {
+      "id": "powers",
+      "label": "软阈值拟合表",
+      "file": "wgcna_powers.csv",
+      "rows": 15,
+      "columns": "power, signedR2, slope, meanK, medianK, maxK"
+    },
+    {
+      "id": "genes",
+      "label": "基因模块归属",
+      "file": "wgcna_genes.csv",
+      "rows": 1250,
+      "columns": "gene, dynamicMods, dynamicColors, moduleLabels, mergedColor"
+    },
+    {
+      "id": "modules",
+      "label": "模块大小",
+      "file": "wgcna_module_sizes.csv",
+      "rows": 5,
+      "columns": "module, genes"
+    },
+    {
+      "id": "traits",
+      "label": "模块-性状相关",
+      "file": "wgcna_module_trait.csv",
+      "rows": 10,
+      "columns": "module, trait, cor, pvalue, fdr"
+    },
+    {
+      "id": "eigengenes",
+      "label": "模块特征向量",
+      "file": "wgcna_eigengenes.csv",
+      "rows": 24,
+      "columns": "sample, MExxx (one column per module)"
+    }
+  ],
+  "tomCached": false,
+  "summary": {
+    "wgcnaId": "wgcna-mwdr7vh3-kl7",
+    "runDir": "D:\\ai\\shengxin\\resources\\demo\\te.degproj\\results\\wgcna\\wgcna-mwdr7vh3-kl7",
+    "geneCount": 1250,
+    "modules": [
+      {
+        "module": "turquoise",
+        "genes": 644
+      },
+      {
+        "module": "blue",
+        "genes": 159
+      },
+      {
+        "module": "brown",
+        "genes": 154
+      },
+      {
+        "module": "yellow",
+        "genes": 153
+      },
+      {
+        "module": "green",
+        "genes": 140
+      }
+    ],
+    "traitRows": [
+      {
+        "module": "blue",
+        "trait": "group",
+        "cor": -0.0812367292122908,
+        "pvalue": 0.705908852195139,
+        "fdr": 0.705908852195139
+      },
+      {
+        "module": "blue",
+        "trait": "stage",
+        "cor": 0.0812367292122908,
+        "pvalue": 0.705908852195139,
+        "fdr": 0.705908852195139
+      },
+      {
+        "module": "brown",
+        "trait": "group",
+        "cor": 0.107671527385946,
+        "pvalue": 0.61652474194409,
+        "fdr": 0.705908852195139
+      },
+      {
+        "module": "brown",
+        "trait": "stage",
+        "cor": -0.107671527385946,
+        "pvalue": 0.61652474194409,
+        "fdr": 0.705908852195139
+      },
+      {
+        "module": "green",
+        "trait": "group",
+        "cor": -0.274132018236067,
+        "pvalue": 0.194880675486095,
+        "fdr": 0.487201688715238
+      },
+      {
+        "module": "green",
+        "trait": "stage",
+        "cor": 0.274132018236067,
+        "pvalue": 0.194880675486095,
+        "fdr": 0.487201688715238
+      },
+      {
+        "module": "turquoise",
+        "trait": "group",
+        "cor": 0.192699184923143,
+        "pvalue": 0.366987822519613,
+        "fdr": 0.611646370866022
+      },
+      {
+        "module": "turquoise",
+        "trait": "stage",
+        "cor": -0.192699184923143,
+        "pvalue": 0.366987822519613,
+        "fdr": 0.611646370866022
+      },
+      {
+        "module": "yellow",
+        "trait": "group",
+        "cor": 0.882106670992546,
+        "pvalue": 1.2098033302346e-8,
+        "fdr": 6.04901665117299e-8
+      },
+      {
+        "module": "yellow",
+        "trait": "stage",
+        "cor": -0.882106670992546,
+        "pvalue": 1.2098033302346e-8,
+        "fdr": 6.04901665117299e-8
+      }
+    ],
+    "plots": [
+      {
+        "id": "sampleTraitTree",
+        "title": "Sample dendrogram and trait heatmap",
+        "caption": "样本聚类树与性状色条。色条越整齐说明该性状与样本结构越一致；如果某个性状的颜色在树的两大分支间明显分层，后面模块-性状相关通常也会显著。",
+        "file": "p04_sample_trait_tree.png",
+        "pdf": "p04_sample_trait_tree.pdf"
+      },
+      {
+        "id": "scaleFree",
+        "title": "Connectivity distribution and scale-free check",
+        "caption": "左：每个基因的连接度分布；右：log10(p(k)) 对 log10(k) 的拟合，点越贴近直线越接近无标度拓扑。右图明显弯曲说明软阈值偏小。",
+        "file": "p05_scale_free.png",
+        "pdf": "p05_scale_free.pdf"
+      },
+      {
+        "id": "geneTree",
+        "title": "Gene clustering on TOM-based dissimilarity",
+        "caption": "基于 TOM 相异度的基因层次聚类树。分支越靠下越相似；这张图只看整体结构，模块划分看下一张。",
+        "file": "p06_gene_tree.png",
+        "pdf": "p06_gene_tree.pdf"
+      },
+      {
+        "id": "moduleTree",
+        "title": "Gene dendrogram and module colors",
+        "caption": "动态树剪切得到的初始模块（未合并）。色条上方的分支与颜色对应，颜色越连贯说明模块越干净。",
+        "file": "p07_module_tree.png",
+        "pdf": "p07_module_tree.pdf"
+      },
+      {
+        "id": "meTree",
+        "title": "Clustering of module eigengenes",
+        "caption": "模块特征向量的聚类树。红线是合并高度；红线以下相连的模块会被合并成一个（相似模块没有必要分开讲）。",
+        "file": "p08_me_tree.png",
+        "pdf": "p08_me_tree.pdf"
+      },
+      {
+        "id": "mergedTree",
+        "title": "Merged module colors",
+        "caption": "上色条是动态剪枝的初始模块，下色条是合并后的最终模块。两行颜色差别越大，说明合并掉的冗余模块越多。",
+        "file": "p09_merged_tree.png",
+        "pdf": "p09_merged_tree.pdf"
+      },
+      {
+        "id": "tomHeatmap",
+        "title": "Network heatmap plot, selected genes",
+        "caption": "随机抽样的基因间 TOM 热图。对角线上的亮块对应模块：块越黄、边界越清楚，模块划分越可靠。",
+        "file": "p10_tom_heatmap.png",
+        "pdf": "p10_tom_heatmap.pdf"
+      },
+      {
+        "id": "traitHeatmap",
+        "title": "Module-trait relationships",
+        "caption": "模块特征向量与性状的相关性。每格上行是相关系数、括号里是 p 值；颜色越深相关越强，白色接近无关。重点看有没有 |r| 大且 p 小的格子。",
+        "file": "p11_trait_heatmap.png",
+        "pdf": "p11_trait_heatmap.pdf"
+      },
+      {
+        "id": "moduleProfile",
+        "title": "Module profile: turquoise",
+        "caption": "模块 turquoise 内每个基因标准化后的表达（上）与模块特征向量（下）。上图行间越整齐、下图柱形起伏越明显，说明该模块越紧凑、越值得后续做通路富集。",
+        "file": "p12_module_profile.png",
+        "pdf": "p12_module_profile.pdf"
+      }
+    ],
+    "tables": [
+      {
+        "id": "powers",
+        "label": "软阈值拟合表",
+        "file": "wgcna_powers.csv",
+        "rows": 15,
+        "columns": "power, signedR2, slope, meanK, medianK, maxK"
+      },
+      {
+        "id": "genes",
+        "label": "基因模块归属",
+        "file": "wgcna_genes.csv",
+        "rows": 1250,
+        "columns": "gene, dynamicMods, dynamicColors, moduleLabels, mergedColor"
+      },
+      {
+        "id": "modules",
+        "label": "模块大小",
+        "file": "wgcna_module_sizes.csv",
+        "rows": 5,
+        "columns": "module, genes"
+      },
+      {
+        "id": "traits",
+        "label": "模块-性状相关",
+        "file": "wgcna_module_trait.csv",
+        "rows": 10,
+        "columns": "module, trait, cor, pvalue, fdr"
+      },
+      {
+        "id": "eigengenes",
+        "label": "模块特征向量",
+        "file": "wgcna_eigengenes.csv",
+        "rows": 24,
+        "columns": "sample, MExxx (one column per module)"
+      }
+    ],
+    "tomCached": false,
+    "softPower": 16,
+    "minModuleSize": 100,
+    "mergeHeight": 0.25,
+    "profileModule": "turquoise",
+    "durationMs": 13345
+  }
+}

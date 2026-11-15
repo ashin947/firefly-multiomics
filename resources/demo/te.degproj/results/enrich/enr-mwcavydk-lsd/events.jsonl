@@ -1,0 +1,14 @@
+@@DEG@@ {"v":1,"type":"log","seq":1,"ts":1794412526453,"level":"info","msg":"font registration skipped (skipFonts=true)"}
+@@DEG@@ {"v":1,"type":"hello","seq":2,"ts":1794412526455,"script":"enrich/run_ora.R","rVersion":"4.3.2","pid":20392}
+@@DEG@@ {"v":1,"type":"log","seq":3,"ts":1794412526534,"level":"info","msg":"input genes: 30  species=human  idType=SYMBOL  db=GO+KEGG  custom=no"}
+@@DEG@@ {"v":1,"type":"progress","seq":4,"ts":1794412530738,"stage":"read","pct":15,"msg":"preparing gene list"}
+@@DEG@@ {"v":1,"type":"progress","seq":5,"ts":1794412530816,"stage":"read","pct":25,"msg":"mapping gene ids"}
+@@DEG@@ {"v":1,"type":"log","seq":6,"ts":1794412531118,"level":"info","msg":"mapped to ENTREZ: 30 / 30"}
+@@DEG@@ {"v":1,"type":"progress","seq":7,"ts":1794412531119,"stage":"enrich","pct":40,"msg":"GO enrichment (ALL)"}
+@@DEG@@ {"v":1,"type":"progress","seq":8,"ts":1794412572537,"stage":"enrich","pct":60,"msg":"KEGG enrichment"}
+@@DEG@@ {"v":1,"type":"progress","seq":9,"ts":1794412606875,"stage":"write","pct":85,"msg":"writing result table"}
+@@DEG@@ {"v":1,"type":"artifact","seq":10,"ts":1794412606902,"kind":"enrich_table","path":"enrich_result.csv","rows":1078,"schema":"EnrichResultRow[]"}
+@@DEG@@ {"v":1,"type":"artifact","seq":11,"ts":1794412606906,"kind":"enrich_table","path":"enrich_result.json","rows":1078,"schema":"EnrichResultRow[]"}
+@@DEG@@ {"v":1,"type":"progress","seq":12,"ts":1794412606907,"stage":"write","pct":100,"msg":"done"}
+@@DEG@@ {"v":1,"type":"log","seq":13,"ts":1794412606909,"level":"info","msg":"enriched terms: GO=1024, KEGG=54"}
+@@DEG@@ {"v":1,"type":"result","seq":14,"ts":1794412606910,"ok":true,"summary":{"totalTerms":1078,"inputGenes":30,"byDatabase":{"GO":1024,"KEGG":54},"durationMs":80376}}

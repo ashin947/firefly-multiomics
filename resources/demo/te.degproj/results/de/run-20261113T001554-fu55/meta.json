@@ -1,0 +1,63 @@
+{
+  "runId": "run-20261113T001554-fu55",
+  "method": "limma-voom",
+  "label": "limma + voom（counts 推荐） · Tumor vs Normal",
+  "config": {
+    "method": "limma-voom",
+    "dataType": "counts",
+    "contrast": {
+      "groupColumn": "group",
+      "numerator": "Tumor",
+      "denominator": "Normal"
+    },
+    "filter": {
+      "enabled": true,
+      "mode": "filterByExpr",
+      "minCount": 10,
+      "minSamplesPct": 30
+    },
+    "fdrMethod": "BH",
+    "outputGeneName": true,
+    "keepAllGenes": false,
+    "inputIsLog2": false,
+    "priorCount": 2
+  },
+  "summary": {
+    "genesAfterFilter": 1400,
+    "up": 75,
+    "down": 48,
+    "ns": 1277,
+    "filteredOut": 600,
+    "durationMs": 274,
+    "contrast": "Tumor",
+    "logFCThreshold": 1,
+    "fdrThreshold": 0.05
+  },
+  "stats": {
+    "totalGenesAfterFilter": 1400,
+    "upCount": 75,
+    "downCount": 48,
+    "nsCount": 1277,
+    "filteredOutCount": 600
+  },
+  "thresholds": {
+    "logFC": 1,
+    "fdr": 0.05
+  },
+  "durationMs": 1038,
+  "startedAt": "2026-11-12T16:15:54.168Z",
+  "finishedAt": "2026-11-12T16:15:55.225Z",
+  "usedFallback": false,
+  "artifacts": [
+    {
+      "kind": "de_table",
+      "path": "de.csv",
+      "rows": 1400
+    },
+    {
+      "kind": "de_table",
+      "path": "de.json",
+      "rows": 1400
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+# electron-builder 打包配置
+#
+# 目标：同事拿到 `LabWorm-Setup-1.0.0.exe`，双击即装（无需管理员、无需装 R），
+# 装完桌面出现「Firefly」快捷方式，双击就能用。
+#
+# ## 为什么 productName 是 ASCII 的 LabWorm，而快捷方式叫 Firefly
+#
+# `productName` 决定 `app.getName()`，而 `app.getPath('userData')` 就是
+# `%APPDATA%\<app.getName()>`。如果这里写中文，用户数据目录会变成
+# `%APPDATA%\实验室的虫` —— 中文路径会被传给 R 子进程（TMPDIR 指向 userData/tmp），
+# Windows 版 R 在非 ASCII 的临时目录上出过问题（本仓库 r/common 的注释里记过这类坑）。
+# 所以运行期目录保持 ASCII，用户能看到的只有快捷方式名和窗口标题：
+# 前者由 `nsis.shortcutName` 控制，后者由 shared/constants.ts 的 APP_NAME 控制。
+
+appId: com.degstudio.app
+productName: LabWorm
+copyright: Copyright © 2026 Firefly
+
+directories:
+  output: dist
+  buildResources: build
+
+# 只把构建产物与 package.json 打进 asar；源码、测试、脚本都不进包
+files:
+  - out/**/*
+  - package.json
+  - '!**/*.map'
+  - '!**/__tests__/**'
+
+# 随包资源（映射到 process.resourcesPath 下，与 src/main/paths.ts 的解析口径一致）
+#
+#   getResourcesRoot() 打包后 = process.resourcesPath
+#   → /r             R 脚本（仓库根 `r/`，打包时必须显式搬进来）
+#   → /runtime/R     内置 R（Rscript.exe 在这里）
+#   → /runtime/R-libs 额外包库（当前为空，包都在 R/library 里）
+#   → /demo, /demo-stress, /viz-demo, /plotTheme.json, /r-libs-manifest.json
+extraResources:
+  - from: r
+    to: r
+  # 内置 R：打包时**排除纯文档与开发期工具**，源目录保持完整。
+  #
+  # 为什么不先删源目录再打包：源树是 assemble:r 从本机 R 拷来的、可重建但很费时，
+  # 一旦删了文档，下次想查 `?someFunc` 就得重拷 1.3 GB。用 filter 在打包这一层
+  # 排除，源树永远完整，产物永远精简。
+  #
+  # 实测这些占 164 MB（doc/help/html/demo）+ 14 MB（pak 装包工具），
+  # 运行期一律用不到：`?foo` / `vignette()` / `demo()` 都不会被应用调用。
+  # `Meta/`、`R/`、`libs/`、`data/`、`extdata/` 必须保留 —— 那是加载包要用的。
+  - from: resources/runtime
+    to: runtime
+    filter:
+      - '**/*'
+      - '!**/doc/**'
+      - '!**/help/**'
+      - '!**/html/**'
+      - '!**/demo/**'
+      - '!**/demos/**'
+      - '!**/tests/**'
+      - '!**/examples/**'
+      - '!**/example/**'
+      - '!**/include/**'
+      - '!**/po/**'
+      - '!**/library/pak/**'
+  - from: resources/demo
+    to: demo
+  - from: resources/demo-stress
+    to: demo-stress
+  - from: resources/viz-demo
+    to: viz-demo
+  # 随包注释表：水稻的「内置背景」靠 resources/annot/rice_go.tsv 实现
+  # （Bioconductor 没有 org.Os.eg.db，水稻只能走 enricher() + 注释表这条路）。
+  #
+  # ★ 排除 `_source/`：那里放的是客户原始导出（rice_go_matched.txt，8.4 MB 长表），
+  #   只在 build-rice-annot.mjs 生成产物时用得到，运行期一律不读。
+  #   打包时排除而不是删除源文件 —— 源树保持可重建，产物保持精简。
+  #
+  # 缺这个产物时 run_ora.R 会报 E_RT_ANNOTATION_MISSING 并告诉用户改选自定义背景，
+  # 不会崩，但「水稻」这个功能就等于没有。所以这一条是**功能项**不是优化项。
+  - from: resources/annot
+    to: annot
+    filter:
+      - '**/*'
+      - '!**/_source/**'
+  # 内置基因集（GSEA 用）：MSigDB 2024.1 规范化后的 GMT
+  #
+  # 缺了它 GSEA 会报 E_RT_ANNOTATION_MISSING，并列出「该物种可用的集合」——
+  # 所以这个目录是**功能项**，不是可选资源。
+  # `_source/` 是 MSigDB 原始下载（带 URL 列、体积更大），只在 build-gmt.mjs 里用。
+  - from: resources/gmt
+    to: gmt
+    filter:
+      - '**/*'
+      - '!**/_source/**'
+  - from: resources/plotTheme.json
+    to: plotTheme.json
+  - from: resources/r-libs-manifest.json
+    to: r-libs-manifest.json
+
+asar: true
+# R 的 1.5 GB 本来就在 extraResources 里，asar 只装 JS，压缩比有限但能省一点
+compression: normal
+# 打包会临时把 electron 解到 dist/win-unpacked，别让它去动 node_modules
+npmRebuild: false
+
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+  icon: build/icon.ico
+  # 请求执行级别：asInvoker → 安装到 %LOCALAPPDATA%，不需要管理员权限。
+  # 同事在公司电脑上往往没有管理员，这一步决定了"能不能装"。
+  requestedExecutionLevel: asInvoker
+  # 单文件超过 2 GB 时 nsis 会失败；当前包预计 700 MB ~ 1 GB，留个余量
+  legalTrademarks: ''
+
+nsis:
+  # ★ 向导式安装（不是一点就装）：客户明确要求「能选安装目录」。
+  #   oneClick: true 的安装器会把目录写死成 %LOCALAPPDATA%\Programs\<name>，
+  #   连「下一步」都没有，自然也没法选。
+  oneClick: false
+  perMachine: false
+  allowElevation: true
+  # 让向导里出现「选择安装位置」这一页
+  allowToChangeInstallationDirectory: true
+  # 只装中文界面，避免一开始先弹一个语言选择框
+  installerLanguages:
+    - zh_CN
+  createDesktopShortcut: always
+  createStartMenuShortcut: true
+  shortcutName: Firefly
+  uninstallDisplayName: Firefly
+  # 装完直接启动 —— 客户要的就是"双击 exe 就能用"
+  runAfterFinish: true
+  # 卸载时不删用户项目与设置（那是用户的科研数据，不是缓存）
+  deleteAppDataOnUninstall: false
+  artifactName: LabWorm-Setup-${version}.exe

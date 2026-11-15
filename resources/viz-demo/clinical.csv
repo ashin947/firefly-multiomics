@@ -1,0 +1,91 @@
+sample,time,status,group
+S01,93,Dead,Low risk
+S02,20,Dead,Low risk
+S03,7,Dead,Low risk
+S04,34,Alive,Low risk
+S05,4,Dead,Low risk
+S06,7,Alive,Low risk
+S07,54,Dead,Low risk
+S08,76,Dead,Low risk
+S09,4,Alive,Low risk
+S10,8,Dead,Low risk
+S11,37,Dead,Low risk
+S12,62,Dead,Low risk
+S13,1,Alive,Low risk
+S14,80,Dead,Low risk
+S15,54,Dead,Low risk
+S16,34,Alive,Low risk
+S17,72,Dead,Low risk
+S18,187,Alive,Low risk
+S19,38,Alive,Low risk
+S20,11,Alive,Low risk
+S21,18,Dead,Low risk
+S22,34,Dead,Low risk
+S23,42,Dead,Low risk
+S24,17,Dead,Low risk
+S25,80,Dead,Low risk
+S26,4,Dead,Low risk
+S27,28,Dead,Low risk
+S28,54,Dead,Low risk
+S29,1,Dead,Low risk
+S30,31,Dead,Low risk
+S31,88,Dead,Medium
+S32,3,Dead,Medium
+S33,10,Dead,Medium
+S34,8,Dead,Medium
+S35,3,Dead,Medium
+S36,5,Dead,Medium
+S37,13,Dead,Medium
+S38,14,Dead,Medium
+S39,17,Dead,Medium
+S40,43,Alive,Medium
+S41,1,Alive,Medium
+S42,34,Dead,Medium
+S43,9,Dead,Medium
+S44,15,Dead,Medium
+S45,5,Dead,Medium
+S46,20,Dead,Medium
+S47,6,Dead,Medium
+S48,53,Alive,Medium
+S49,24,Dead,Medium
+S50,36,Dead,Medium
+S51,4,Dead,Medium
+S52,8,Dead,Medium
+S53,19,Dead,Medium
+S54,5,Dead,Medium
+S55,15,Dead,Medium
+S56,26,Alive,Medium
+S57,40,Dead,Medium
+S58,23,Dead,Medium
+S59,4,Alive,Medium
+S60,3,Dead,Medium
+S61,1,Dead,High risk
+S62,12,Dead,High risk
+S63,34,Dead,High risk
+S64,4,Dead,High risk
+S65,10,Dead,High risk
+S66,1,Dead,High risk
+S67,5,Dead,High risk
+S68,5,Dead,High risk
+S69,1,Dead,High risk
+S70,1,Dead,High risk
+S71,25,Dead,High risk
+S72,13,Dead,High risk
+S73,4,Dead,High risk
+S74,1,Dead,High risk
+S75,8,Dead,High risk
+S76,3,Dead,High risk
+S77,9,Dead,High risk
+S78,17,Dead,High risk
+S79,1,Dead,High risk
+S80,8,Dead,High risk
+S81,3,Dead,High risk
+S82,1,Dead,High risk
+S83,5,Dead,High risk
+S84,16,Dead,High risk
+S85,11,Dead,High risk
+S86,15,Dead,High risk
+S87,7,Dead,High risk
+S88,2,Dead,High risk
+S89,7,Dead,High risk
+S90,10,Dead,High risk

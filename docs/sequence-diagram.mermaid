@@ -1,0 +1,244 @@
+%% DEG Studio v1.0 · 核心时序图
+%% 对应 docs/ARCHITECTURE.md §7
+
+%% ===================== ① 启动自检 =====================
+sequenceDiagram
+    autonumber
+    participant UI as Renderer HomePage
+    participant PL as Preload window.deg
+    participant SH as systemHandlers
+    participant RS as RRuntimeResolver
+    participant RUN as RProcessRunner
+    participant R as Rscript
+    participant CACHE as userData/runtime-probe.json
+
+    UI->>PL: deg.runtime.probe({})
+    PL->>SH: invoke('deg:runtime:probe')
+    SH->>RS: resolve()
+    RS->>CACHE: 读缓存
+    alt 缓存有效（path+mtime+manifestHash 匹配，<7 天）
+        CACHE-->>RS: RuntimeProbeResult
+        RS-->>SH: RRuntimeInfo(ok, source)
+        Note over RS: 后台 stale-while-revalidate 静默重探
+    else 缓存失效
+        RS->>RS: 三级候选存在性检查
+        RS->>RUN: run({script:'probe/check_runtime.R'})
+        RUN->>R: spawn Rscript --vanilla check_runtime.R --config cfg.json
+        R-->>RUN: @@DEG@@ hello / progress / log
+        R-->>RUN: @@DEG@@ result {rVersion, packages, speciesLibs}
+        RUN-->>RS: RuntimeProbeResult
+        RS->>CACHE: 原子写缓存
+        RS-->>SH: RRuntimeInfo
+    end
+    SH-->>PL: {ok:true, data:RRuntimeInfo}
+    PL-->>UI: RRuntimeInfo
+    UI->>UI: runtimeStore.set(info) → 点亮三盏状态灯
+    alt info.ok === false
+        UI->>UI: 顶部红色横幅 + 「查看修复指引」
+    end
+
+%% ===================== ② 导入并校验数据 =====================
+sequenceDiagram
+    autonumber
+    participant UI as ImportWizardPage
+    participant DH as dataHandlers
+    participant SN as FileSniffer
+    participant MI as MatrixImporter
+    participant GI as GroupImporter
+    participant DV as DataValidator
+    participant GID as GeneIdResolver
+    participant PS as ProjectService
+    participant FS as .degproj/
+
+    UI->>DH: invoke('deg:data:importMatrix', {filePath, dataType, species})
+    DH->>SN: sniff(filePath)
+    SN-->>DH: {encoding:'gb18030', delimiter:',', hasHeader:true}
+    DH->>MI: parse(filePath, sniffResult)
+    MI->>MI: 流式解析 → 定位非数值/重复基因/重复样本
+    MI->>MI: 按策略聚合重复基因 + 去全零行
+    MI->>FS: 写 data/expression.raw.csv + expression.clean.csv
+    MI-->>DH: ImportMatrixResult{summary, preview(100行), detectedGeneIdType}
+    DH-->>UI: {ok:true, data}
+    UI->>UI: 识别摘要 + 前 100 行预览 + 基因 ID 类型
+
+    opt 用户改基因 ID 列 / 重复基因策略
+        UI->>DH: invoke('deg:data:setGeneIdColumn' | 'deg:data:aggregateDuplicates')
+        DH->>MI: 重新清洗（复用已解析缓存）
+        MI-->>DH: 新 ImportMatrixResult
+        DH-->>UI: 更新
+    end
+
+    UI->>DH: invoke('deg:data:importGroups', {filePath, sampleColumn, groupColumn})
+    DH->>GI: parse + 列映射
+    GI-->>DH: {groups, preview}
+    DH->>DV: validate(matrix, groups)
+    DV-->>DH: Issue[]（样本差集/组数<2/组内<2/NA/全零/非整数）
+    DH-->>UI: {ok:true, data:{groups, issues}}
+    UI->>UI: IssueList 渲染（error 阻断「下一步」）
+
+    UI->>DH: invoke('deg:data:validate', {overrides})
+    DH->>DV: 全量校验（含 counts 整数性）
+    DV-->>DH: {issues, summary}
+    DH->>PS: save({dataset: summary, status:'imported'})
+    PS->>FS: 原子写 project.json
+    DH-->>UI: {ok:true, data}
+    UI->>UI: 步骤条前进到 ③ 校验通过
+
+    opt 需要 ID 转换
+        UI->>DH: invoke('deg:data:resolveGeneIds', {target:'ENTREZ'})
+        DH->>GID: 调 r/probe/map_gene_ids.R
+        GID-->>DH: {mapping, unmapped}
+        DH->>FS: 写 data/gene_id_map.json
+        DH-->>UI: {ok:true, data}
+    end
+
+%% ===================== ③ 运行差异分析（进度 / 取消） =====================
+sequenceDiagram
+    autonumber
+    participant UI as AnalysisConfigPage
+    participant AH as analysisHandlers
+    participant AR as AnalysisRunner
+    participant REG as AnalysisRegistry
+    participant RUN as RProcessRunner
+    participant CM as ChildProcessManager
+    participant R as Rscript 子进程
+    participant FS as .degproj/
+
+    UI->>AH: invoke('deg:analysis:run', {method:'deseq2', config})
+    AH->>AH: zod 校验 config
+    AH->>AR: run(method, config)
+    AR->>AR: 预检（dataType / counts 整数性 / 组内样本数）
+    alt 预检失败
+        AR-->>AH: AppError
+        AH-->>UI: {ok:false, error}
+    end
+    AR->>REG: get('deseq2')
+    REG-->>AR: module
+    AR->>FS: 建 results/de/<runId>/ + logs/<runId>.log
+    AR->>FS: 写 run_config.json
+    AR->>RUN: run({runId, script:'de/run_deseq2.R', onProgress, onLog, signal})
+    RUN->>CM: register(runId, child)
+    RUN->>R: spawn Rscript --vanilla ... --config run_config.json
+    AH-->>UI: {ok:true, data:{runId}}
+    UI->>UI: analysisStore → 'running'，打开 RunOverlay
+
+    loop 逐行解析 stdout
+        R-->>RUN: @@DEG@@ {"type":"progress","stage":"read","pct":8}
+        RUN->>RUN: 解析 + pct 单调修正 + 100ms 节流
+        RUN-->>AH: onProgress
+        AH->>UI: send('deg:event:analysisProgress', {runId, stage, pct})
+        R-->>RUN: @@DEG@@ {"type":"log","level":"info","msg":"..."}
+        RUN-->>AH: onLog
+        AH->>UI: send('deg:event:analysisLog', {runId, ts, level, line})
+    end
+
+    alt 用户取消（二次确认）
+        UI->>AH: invoke('deg:analysis:cancel', {runId})
+        AH->>RUN: abort(signal)
+        RUN->>CM: kill(runId) → taskkill /pid <pid> /T /F
+        CM-->>RUN: killed
+        RUN-->>AR: RunRResult{cancelled:true}
+        AR-->>AH: {status:'cancelled'}
+        AH->>UI: send('deg:event:analysisDone', {runId, status:'cancelled'})
+        UI->>UI: 回「待配置」，不弹错误
+    else 正常完成
+        R-->>RUN: @@DEG@@ {"type":"artifact","kind":"de_table","path":"de.csv","rows":5120}
+        R-->>RUN: @@DEG@@ {"type":"result","ok":true,"summary":{...}}
+        R-->>RUN: exit(0)
+        RUN-->>AR: RunRResult{ok:true, summary, artifacts}
+        AR->>FS: ResultLoader 读 de.csv → zod 校验 → 写 meta.json + logs/<runId>.log
+        AR->>FS: 更新 project.json（analyses[] + activeAnalysisId + status）
+        AR-->>AH: {status:'success', analysisId, stats}
+        AH->>UI: send('deg:event:analysisDone', {runId, status:'success', result})
+        UI->>UI: 跳转 S4 结果总览
+    else R 失败
+        R-->>RUN: @@DEG@@ {"type":"error","code":"E_DATA_NOT_INTEGER"} + exit(13)
+        RUN->>RUN: RErrorTranslator.translate(stderr, exitCode, protocolError)
+        RUN-->>AR: RunRResult{ok:false}
+        AR-->>AH: AppError{code,title,message,suggestion,detail}
+        AH->>UI: send('deg:event:analysisDone', {runId, status:'failed', error})
+        UI->>UI: ErrorBanner（中文 + 建议 + 展开原始日志）
+    end
+
+%% ===================== ④ 生成图表（compute 预览 + export 导出） =====================
+sequenceDiagram
+    autonumber
+    participant UI as PlotPage
+    participant PH as plotHandlers
+    participant PS as PlotService
+    participant RUN as RProcessRunner
+    participant R as Rscript
+    participant FE as ECharts
+
+    Note over UI: 切换到「热图」标签
+    UI->>PH: invoke('deg:plot:compute', {type:'heatmap', config, analysisId})
+    PH->>PS: compute(type, config, analysisId)
+    PS->>PS: 参数 hash → 查 cache/heatmap_payload_<hash>.json
+    alt 缓存命中
+        PS-->>PH: HeatmapPayload
+    else 未命中
+        PS->>RUN: run({script:'plot/compute_heatmap.R', config})
+        RUN->>R: spawn
+        R-->>RUN: @@DEG@@ progress(plot) / artifact(heatmap_payload)
+        RUN-->>PS: artifacts
+        PS->>PS: 读 payload + 写 cache
+        PS-->>PH: HeatmapPayload
+    end
+    PH-->>UI: {ok:true, data:payload}
+    UI->>FE: plotSpecs.heatmap(payload, config, theme) → setOption
+    FE-->>UI: 画布渲染完成（rowOrder/colOrder 严格按 R 给定）
+
+    Note over UI: 拖「字号 / 配色 / TopN」
+    UI->>UI: plotStore 更新（300ms 防抖）
+    UI->>FE: 仅 setOption（本地，无 IPC）
+    Note over UI: TopN 变化会触发新 compute（R 需重算聚类）
+
+    Note over UI: 点「导出当前图」
+    UI->>PH: invoke('deg:plot:export', {type, config, analysisId, outDir})
+    PH->>PS: export(...)
+    PS->>RUN: run({script:'plot/export_heatmap.R', config:{formats:['png','pdf'], dpi:300}})
+    RUN->>R: spawn（ragg::agg_png + cairo_pdf，DEGSans 字体）
+    R-->>RUN: @@DEG@@ artifact(figure) × 2 + result
+    RUN-->>PS: files
+    PS->>PS: 复制到 .degproj/figures/ + 记录 project.json.plots
+    PS-->>PH: {files, durationMs}
+    PH-->>UI: {ok:true, data}
+    UI->>UI: Snackbar「已导出 2 个文件」+「在文件夹中显示」
+
+%% ===================== ⑤ 运行 GO 富集 =====================
+sequenceDiagram
+    autonumber
+    participant UI as EnrichPage
+    participant EH as analysisHandlers
+    participant AR as AnalysisRunner
+    participant REG as AnalysisRegistry
+    participant RUN as RProcessRunner
+    participant R as Rscript
+
+    UI->>UI: 读 thresholdStore → 当前显著基因（上调 702 / 下调 582 / 全部 1284）
+    UI->>EH: invoke('deg:enrich:run', {config:{source:'go', goOntology:['BP','CC','MF'], input:{mode:'degs',direction:'all',thresholds}}})
+    EH->>AR: run('ora-go', config)
+    AR->>AR: 预检：基因数 ≥ 10？物种库已装？
+    AR->>REG: get('ora-go')
+    AR->>RUN: run({script:'enrich/run_ora_go.R', config})
+    RUN->>R: spawn Rscript --vanilla
+    R-->>RUN: @@DEG@@ progress(enrich, 30)
+    R-->>RUN: @@DEG@@ log("enrichGO BP 完成，获得 412 条目")
+    R-->>RUN: @@DEG@@ artifact(enrich_table, 'enrich_GO_BP.csv', rows=412)
+    R-->>RUN: @@DEG@@ artifact(enrich_table, 'enrich_GO_CC.csv', rows=208)
+    R-->>RUN: @@DEG@@ artifact(enrich_table, 'enrich_GO_MF.csv', rows=131)
+    R-->>RUN: @@DEG@@ result{ok:true}
+    RUN-->>AR: artifacts
+    AR->>AR: ResultLoader 合并三张表（source 区分 GO:BP/CC/MF）
+    AR-->>EH: {enrichId, rows, summary}
+    EH-->>UI: {ok:true, data}
+    UI->>UI: EnrichResultTable（来源切换）+ EnrichBubbleChart + EnrichBarChart
+
+    Note over UI: 勾选 KEGG 但断网
+    UI->>EH: invoke('deg:enrich:run', {config:{source:'kegg',...}})
+    EH->>AR: run('ora-kegg', config)
+    AR->>RUN: run(...)
+    R-->>RUN: @@DEG@@ error{code:'E_KEGG_NETWORK'} + exit(10)
+    RUN->>RUN: RErrorTranslator 命中 KEGG 规则
+    EH-->>UI: {ok:false, error:{code:'E_KEGG_NETWORK', title:'KEGG 需要联网'}}
+    UI->>UI: Dialog：「KEGG 通路数据需联网获取，请连接网络后重试（GO 富集可正常使用）」

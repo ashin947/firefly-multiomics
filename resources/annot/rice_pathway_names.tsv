@@ -1,0 +1,164 @@
+dosa00010	Glycolysis / Gluconeogenesis
+dosa00020	Citrate cycle (TCA cycle)
+dosa00030	Pentose phosphate pathway
+dosa00040	Pentose and glucuronate interconversions
+dosa00051	Fructose and mannose metabolism
+dosa00052	Galactose metabolism
+dosa00053	Ascorbate and aldarate metabolism
+dosa00061	Fatty acid biosynthesis
+dosa00062	Fatty acid elongation
+dosa00071	Fatty acid degradation
+dosa00073	Cutin, suberine and wax biosynthesis
+dosa00100	Steroid biosynthesis
+dosa00130	Ubiquinone and other terpenoid-quinone biosynthesis
+dosa00190	Oxidative phosphorylation
+dosa00195	Photosynthesis
+dosa00196	Photosynthesis - antenna proteins
+dosa00220	Arginine biosynthesis
+dosa00230	Purine metabolism
+dosa00232	Caffeine metabolism
+dosa00240	Pyrimidine metabolism
+dosa00250	Alanine, aspartate and glutamate metabolism
+dosa00260	Glycine, serine and threonine metabolism
+dosa00261	Monobactam biosynthesis
+dosa00270	Cysteine and methionine metabolism
+dosa00280	Valine, leucine and isoleucine degradation
+dosa00290	Valine, leucine and isoleucine biosynthesis
+dosa00300	Lysine biosynthesis
+dosa00310	Lysine degradation
+dosa00330	Arginine and proline metabolism
+dosa00340	Histidine metabolism
+dosa00350	Tyrosine metabolism
+dosa00360	Phenylalanine metabolism
+dosa00380	Tryptophan metabolism
+dosa00400	Phenylalanine, tyrosine and tryptophan biosynthesis
+dosa00402	Benzoxazinoid biosynthesis
+dosa00410	beta-Alanine metabolism
+dosa00430	Taurine and hypotaurine metabolism
+dosa00440	Phosphonate and phosphinate metabolism
+dosa00450	Selenocompound metabolism
+dosa00460	Cyanoamino acid metabolism
+dosa00470	D-Amino acid metabolism
+dosa00480	Glutathione metabolism
+dosa00500	Starch and sucrose metabolism
+dosa00510	N-Glycan biosynthesis
+dosa00511	Other glycan degradation
+dosa00513	Various types of N-glycan biosynthesis
+dosa00514	Other types of O-glycan biosynthesis
+dosa00520	Amino sugar and nucleotide sugar metabolism
+dosa00531	Glycosaminoglycan degradation
+dosa00540	Lipopolysaccharide biosynthesis
+dosa00541	Biosynthesis of various nucleotide sugars
+dosa00543	Exopolysaccharide biosynthesis
+dosa00561	Glycerolipid metabolism
+dosa00562	Inositol phosphate metabolism
+dosa00563	Glycosylphosphatidylinositol (GPI)-anchor biosynthesis
+dosa00564	Glycerophospholipid metabolism
+dosa00565	Ether lipid metabolism
+dosa00566	Sulfoquinovose metabolism
+dosa00590	Arachidonic acid metabolism
+dosa00591	Linoleic acid metabolism
+dosa00592	alpha-Linolenic acid metabolism
+dosa00600	Sphingolipid metabolism
+dosa00601	Glycosphingolipid biosynthesis - lacto and neolacto series
+dosa00603	Glycosphingolipid biosynthesis - globo and isoglobo series
+dosa00604	Glycosphingolipid biosynthesis - ganglio series
+dosa00620	Pyruvate metabolism
+dosa00630	Glyoxylate and dicarboxylate metabolism
+dosa00640	Propanoate metabolism
+dosa00650	Butanoate metabolism
+dosa00660	C5-Branched dibasic acid metabolism
+dosa00670	One carbon pool by folate
+dosa00710	Carbon fixation by Calvin cycle
+dosa00730	Thiamine metabolism
+dosa00740	Riboflavin metabolism
+dosa00750	Vitamin B6 metabolism
+dosa00760	Nicotinate and nicotinamide metabolism
+dosa00770	Pantothenate and CoA biosynthesis
+dosa00780	Biotin metabolism
+dosa00785	Lipoic acid metabolism
+dosa00790	Folate biosynthesis
+dosa00860	Porphyrin metabolism
+dosa00900	Terpenoid backbone biosynthesis
+dosa00901	Indole alkaloid biosynthesis
+dosa00902	Monoterpenoid biosynthesis
+dosa00904	Diterpenoid biosynthesis
+dosa00905	Brassinosteroid biosynthesis
+dosa00906	Carotenoid biosynthesis
+dosa00908	Zeatin biosynthesis
+dosa00909	Sesquiterpenoid and triterpenoid biosynthesis
+dosa00910	Nitrogen metabolism
+dosa00920	Sulfur metabolism
+dosa00940	Phenylpropanoid biosynthesis
+dosa00941	Flavonoid biosynthesis
+dosa00942	Anthocyanin biosynthesis
+dosa00944	Flavone and flavonol biosynthesis
+dosa00945	Stilbenoid, diarylheptanoid and gingerol biosynthesis
+dosa00950	Isoquinoline alkaloid biosynthesis
+dosa00960	Tropane, piperidine and pyridine alkaloid biosynthesis
+dosa00965	Betalain biosynthesis
+dosa00966	Glucosinolate metabolism
+dosa00970	Aminoacyl-tRNA biosynthesis
+dosa00999	Biosynthesis of various plant secondary metabolites
+dosa01040	Biosynthesis of unsaturated fatty acids
+dosa01100	Metabolic pathways
+dosa01110	Biosynthesis of secondary metabolites
+dosa01200	Carbon metabolism
+dosa01210	2-Oxocarboxylic acid metabolism
+dosa01212	Fatty acid metabolism
+dosa01230	Biosynthesis of amino acids
+dosa01232	Nucleotide metabolism
+dosa01240	Biosynthesis of cofactors
+dosa01250	Biosynthesis of nucleotide sugars
+dosa01310	Nitrogen cycle
+dosa01320	Sulfur cycle
+dosa02010	ABC transporters
+dosa03008	Ribosome biogenesis in eukaryotes
+dosa03010	Ribosome
+dosa03013	Nucleocytoplasmic transport
+dosa03015	mRNA surveillance pathway
+dosa03018	RNA degradation
+dosa03020	RNA polymerase
+dosa03022	Basal transcription factors
+dosa03030	DNA replication
+dosa03040	Spliceosome
+dosa03050	Proteasome
+dosa03060	Protein export
+dosa03082	ATP-dependent chromatin remodeling
+dosa03083	Polycomb repressive complex
+dosa03250	Viral life cycle - HIV-1
+dosa03272	Virion - Hepatitis viruses
+dosa03410	Base excision repair
+dosa03420	Nucleotide excision repair
+dosa03430	Mismatch repair
+dosa03440	Homologous recombination
+dosa03450	Non-homologous end-joining
+dosa03460	Fanconi anemia pathway
+dosa04016	MAPK signaling pathway - plant
+dosa04070	Phosphatidylinositol signaling system
+dosa04075	Plant hormone signal transduction
+dosa04081	Hormone signaling
+dosa04082	Neuroactive ligand signaling
+dosa04120	Ubiquitin mediated proteolysis
+dosa04122	Sulfur relay system
+dosa04130	SNARE interactions in vesicular transport
+dosa04136	Autophagy - other
+dosa04141	Protein processing in endoplasmic reticulum
+dosa04142	Lysosome biogenesis
+dosa04144	Endocytosis
+dosa04145	Phagocytosis
+dosa04146	Peroxisome
+dosa04148	Efferocytosis
+dosa04156	Integrated stress response (ISR) signaling pathway
+dosa04382	Cornified envelope formation
+dosa04517	IgSF CAM signaling
+dosa04518	Integrin signaling
+dosa04519	Cadherin signaling
+dosa04620	Toll-like receptor signaling pathway
+dosa04626	Plant-pathogen interaction
+dosa04712	Circadian rhythm - plant
+dosa04814	Motor proteins
+dosa04820	Cytoskeleton in muscle cells
+dosa04900	Neuroendocrine signaling pathway of hypothalamus-pituitary axis
+dosa04981	Folate transport and metabolism
+dosa05100	Bacterial invasion of epithelial cells

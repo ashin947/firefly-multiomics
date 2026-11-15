@@ -1,0 +1,15 @@
+{
+  "runId": "wgcna-mwdr7vh3-kl7",
+  "runDir": "D:\\ai\\shengxin\\resources\\demo\\te.degproj\\results\\wgcna\\wgcna-mwdr7vh3-kl7",
+  "projectRoot": "D:\\ai\\shengxin\\resources\\demo\\te.degproj",
+  "params": {
+    "wgcnaId": "wgcna-mwdr7vh3-kl7",
+    "softPower": 16,
+    "minModuleSize": 100,
+    "mergeHeight": 0.25,
+    "heatmapPalette": "rdylbu",
+    "profileModule": "",
+    "tomSampleSize": 1000,
+    "skipFonts": true
+  }
+}

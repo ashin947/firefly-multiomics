@@ -1,0 +1,52 @@
+# 依赖
+node_modules/
+
+# 构建产物
+out/
+dist/
+release/
+*.tsbuildinfo
+
+# ★ R 运行时二进制不入库（约 1.5–2.5 GB，GPL 分发由打包流程处理）
+resources/runtime/R/
+resources/runtime/R-libs/
+
+# 但保留目录占位
+!resources/runtime/R/.gitkeep
+!resources/runtime/R-libs/.gitkeep
+
+# 日志与临时文件
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# 测试与覆盖率
+coverage/
+.vitest/
+test-results/
+playwright-report/
+
+# R 冒烟脚本 --keep 保留的临时项目（scripts/smoke-r-de.R）
+.smoke-tmp/
+
+# 测试/走查用的临时目录（统一放项目内，见 scripts/lib/tmpdir.mjs）
+.tmp/
+
+# ===== 公开仓库不包含的内部资料 =====
+# 客户提供的原始分析脚本（客户资产，不随开源仓库分发）
+docs/reference/
+# 界面截图（含真实样品名 MD / WW / IR09 / ZS97）
+docs/screenshots/
+docs/screenshots-packaged/
+docs/screenshots-viz/
+# 内部决策记录（含客户需求细节与沟通过程）
+docs/DEV-NOTES.md
+
+# 构建期临时目录（R 安装包缓存、复现脚本产物）
+.tmp/
+.tmp-r/
+.repro/
+
+# 开发辅助记录（含沟通过程与客户细节，不入公开仓库）
+.workbuddy-ai/

@@ -1,0 +1,19 @@
+@@DEG@@ {"v":1,"type":"log","seq":1,"ts":1794398193140,"level":"info","msg":"registered CJK font: C:/Windows/Fonts/msyh.ttc"}
+@@DEG@@ {"v":1,"type":"hello","seq":2,"ts":1794398193142,"script":"de/run_deseq2.R","rVersion":"4.3.2","pid":21096}
+@@DEG@@ {"v":1,"type":"progress","seq":3,"ts":1794398199714,"stage":"read","pct":3,"msg":"reading expression matrix"}
+@@DEG@@ {"v":1,"type":"log","seq":4,"ts":1794398199734,"level":"info","msg":"expression matrix: 2000 genes x 24 samples"}
+@@DEG@@ {"v":1,"type":"progress","seq":5,"ts":1794398199734,"stage":"read","pct":15,"msg":"reading groups table"}
+@@DEG@@ {"v":1,"type":"log","seq":6,"ts":1794398199763,"level":"info","msg":"groups: Tumor(12), Normal(12)"}
+@@DEG@@ {"v":1,"type":"log","seq":7,"ts":1794398199774,"level":"info","msg":"contrast: group Tumor vs Normal  (logFC > 0 => up in Tumor)"}
+@@DEG@@ {"v":1,"type":"log","seq":8,"ts":1794398199827,"level":"info","msg":"filterByExpr applied"}
+@@DEG@@ {"v":1,"type":"progress","seq":9,"ts":1794398199830,"stage":"filter","pct":20,"msg":"1400 genes kept (600 filtered out)"}
+@@DEG@@ {"v":1,"type":"progress","seq":10,"ts":1794398199831,"stage":"normalize","pct":22,"msg":"building DESeqDataSet"}
+@@DEG@@ {"v":1,"type":"progress","seq":11,"ts":1794398200143,"stage":"normalize","pct":30,"msg":"estimating size factors"}
+@@DEG@@ {"v":1,"type":"progress","seq":12,"ts":1794398200340,"stage":"normalize","pct":35,"msg":"size factors estimated"}
+@@DEG@@ {"v":1,"type":"progress","seq":13,"ts":1794398200340,"stage":"dispersion","pct":38,"msg":"estimating dispersions (this may take a while)"}
+@@DEG@@ {"v":1,"type":"progress","seq":14,"ts":1794398201255,"stage":"dispersion","pct":65,"msg":"dispersion estimated"}
+@@DEG@@ {"v":1,"type":"progress","seq":15,"ts":1794398201256,"stage":"fit","pct":70,"msg":"fitting negative binomial GLM (Wald test)"}
+@@DEG@@ {"v":1,"type":"progress","seq":16,"ts":1794398201820,"stage":"fit","pct":85,"msg":"model fitted"}
+@@DEG@@ {"v":1,"type":"progress","seq":17,"ts":1794398201821,"stage":"test","pct":88,"msg":"extracting results"}
+@@DEG@@ {"v":1,"type":"progress","seq":18,"ts":1794398202085,"stage":"test","pct":90,"msg":"1400 genes tested"}
+@@DEG@@ {"v":1,"type":"error","seq":19,"ts":1794398202089,"code":"E_DATA_EMPTY","message":"DESeq2 returned no testable genes"}

@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * 全局样式只放「MUI 无法表达」的东西：
+ *  - html/body 高度 100%（MUI 的 CssBaseline 在 preflight:false 下不会设高度）
+ *  - 滚动条美化（表格与日志面板需要）
+ * 注意：Tailwind 的 preflight 已关闭，所以这里不做任何 reset。
+ */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow: hidden; /* 桌面应用：整体不滚动，滚动交给内部容器 */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 细滚动条（Chromium only，桌面端可控） */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.22);
+  border-radius: 5px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.36);
+}

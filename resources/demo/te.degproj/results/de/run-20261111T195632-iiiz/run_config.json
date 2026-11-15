@@ -1,0 +1,33 @@
+{
+  "runId": "run-20261111T195632-iiiz",
+  "projectRoot": "D:\\ai\\shengxin\\resources\\demo\\te.degproj",
+  "runDir": "D:\\ai\\shengxin\\resources\\demo\\te.degproj\\results\\de\\run-20261111T195632-iiiz",
+  "themePath": "D:\\ai\\shengxin\\resources\\plotTheme.json",
+  "fontPath": "D:\\ai\\shengxin\\resources\\runtime\\fonts\\NotoSansSC-Regular.otf",
+  "params": {
+    "matrixPath": "D:\\ai\\shengxin\\resources\\demo\\te.degproj\\data\\expression.clean.csv",
+    "groupsPath": "D:\\ai\\shengxin\\resources\\demo\\te.degproj\\data\\groups.csv",
+    "species": "human",
+    "dataType": "counts",
+    "sampleColumn": "sample",
+    "groupColumn": "group",
+    "geneIdType": "SYMBOL",
+    "contrast": {
+      "groupColumn": "group",
+      "numerator": "Tumor",
+      "denominator": "Normal"
+    },
+    "filter": {
+      "enabled": true,
+      "mode": "filterByExpr",
+      "minCount": 10,
+      "minSamplesPct": 30
+    },
+    "fdrMethod": "BH",
+    "outputGeneName": true,
+    "keepAllGenes": false,
+    "logFCThreshold": 1,
+    "fdrThreshold": 0.05,
+    "shrinkLfc": false
+  }
+}

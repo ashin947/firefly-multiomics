@@ -1,0 +1,326 @@
+{
+  "schemaVersion": 1,
+  "rVersion": "4.3.2",
+  "bioconductorVersion": "3.18",
+  "notes": "必需包清单（ARCHITECTURE §10.2）。构建期由 scripts/gen-r-libs-manifest.mjs 依据实际安装情况刷新 version 字段。required=true 的包缺失时 RRuntimeInfo.ok=false（首页核心包灯转黄），但**不再整体阻断进入分析页**：能否运行由所选方法的 requiredPackages 逐方法判定（缺 DESeq2 不影响 limma-voom）。",
+  "speciesLibs": {
+    "human": "org.Hs.eg.db",
+    "mouse": "org.Mm.eg.db"
+  },
+  "packages": [
+    {
+      "name": "jsonlite",
+      "version": "2.0.0",
+      "purpose": "协议 JSON / 配置读写",
+      "required": true,
+      "source": "CRAN"
+    },
+    {
+      "name": "data.table",
+      "version": "1.17.0",
+      "purpose": "fread 快速读矩阵、结果写盘",
+      "required": true,
+      "source": "CRAN"
+    },
+    {
+      "name": "limma",
+      "version": "3.58.1",
+      "purpose": "limma-voom / lmFit / eBayes",
+      "required": true,
+      "source": "Bioconductor"
+    },
+    {
+      "name": "edgeR",
+      "version": "4.0.16",
+      "purpose": "filterByExpr / DGEList / calcNormFactors",
+      "required": true,
+      "source": "Bioconductor"
+    },
+    {
+      "name": "DESeq2",
+      "version": "1.42.1",
+      "purpose": "DESeq2 差异分析",
+      "required": true,
+      "source": "Bioconductor"
+    },
+    {
+      "name": "AnnotationDbi",
+      "version": "1.64.1",
+      "purpose": "基因 ID 映射 + GO 条目名/ontology 查询",
+      "required": true,
+      "source": "Bioconductor"
+    },
+    {
+      "name": "clusterProfiler",
+      "version": "4.10.1",
+      "purpose": "enrichGO / enrichKEGG",
+      "required": true,
+      "source": "Bioconductor"
+    },
+    {
+      "name": "DOSE",
+      "version": "3.28.2",
+      "purpose": "clusterProfiler 依赖 + 富集结果结构",
+      "required": true,
+      "source": "Bioconductor"
+    },
+    {
+      "name": "enrichplot",
+      "version": "1.22.0",
+      "purpose": "富集图（备用）",
+      "required": true,
+      "source": "Bioconductor"
+    },
+    {
+      "name": "ggplot2",
+      "version": "3.5.1",
+      "purpose": "所有导出图",
+      "required": true,
+      "source": "CRAN"
+    },
+    {
+      "name": "ggrepel",
+      "version": "0.9.6",
+      "purpose": "火山图基因标签防重叠",
+      "required": true,
+      "source": "CRAN"
+    },
+    {
+      "name": "pheatmap",
+      "version": "1.0.12",
+      "purpose": "热图（含聚类）",
+      "required": true,
+      "source": "CRAN"
+    },
+    {
+      "name": "RColorBrewer",
+      "version": "1.1-3",
+      "purpose": "调色板",
+      "required": true,
+      "source": "CRAN"
+    },
+    {
+      "name": "ragg",
+      "version": "1.3.3",
+      "purpose": "PNG 出图（字体渲染最稳）",
+      "required": true,
+      "source": "CRAN"
+    },
+    {
+      "name": "showtext",
+      "version": "0.9-7",
+      "purpose": "中文文本渲染接管",
+      "required": true,
+      "source": "CRAN"
+    },
+    {
+      "name": "sysfonts",
+      "version": "0.8.9",
+      "purpose": "字体注册",
+      "required": true,
+      "source": "CRAN"
+    },
+    {
+      "name": "matrixStats",
+      "version": "1.5.0",
+      "purpose": "PCA 前的高变基因筛选",
+      "required": true,
+      "source": "CRAN"
+    },
+    {
+      "name": "org.Hs.eg.db",
+      "version": "3.18.0",
+      "purpose": "Human 物种注释库",
+      "required": true,
+      "speciesScoped": true,
+      "source": "Bioconductor",
+      "species": "human"
+    },
+    {
+      "name": "org.Mm.eg.db",
+      "version": "3.18.0",
+      "purpose": "Mouse 物种注释库",
+      "required": true,
+      "speciesScoped": true,
+      "source": "Bioconductor",
+      "species": "mouse"
+    },
+    {
+      "name": "org.Rn.eg.db",
+      "version": null,
+      "purpose": "Rat 物种注释库（P1）",
+      "required": false,
+      "speciesScoped": true,
+      "source": "Bioconductor",
+      "species": "rat"
+    },
+    {
+      "name": "org.Dr.eg.db",
+      "version": null,
+      "purpose": "Zebrafish 物种注释库（P1）",
+      "required": false,
+      "speciesScoped": true,
+      "source": "Bioconductor",
+      "species": "zebrafish"
+    },
+    {
+      "name": "org.At.tair.db",
+      "version": null,
+      "purpose": "Arabidopsis 物种注释库（P1）",
+      "required": false,
+      "speciesScoped": true,
+      "source": "Bioconductor",
+      "species": "arabidopsis"
+    },
+    {
+      "name": "org.Sc.sgd.db",
+      "version": null,
+      "purpose": "Yeast 物种注释库（P1）",
+      "required": false,
+      "speciesScoped": true,
+      "source": "Bioconductor",
+      "species": "yeast"
+    },
+    {
+      "version": "3.18.0",
+      "name": "GO.db",
+      "purpose": "GO 本体（clusterProfiler 的运行时依赖，缺它 clusterProfiler 加载不了）",
+      "required": true,
+      "source": "Bioconductor"
+    },
+    {
+      "version": "1.7.3",
+      "name": "VennDiagram",
+      "purpose": "Venn 图（2~5 组经典椭圆排布）",
+      "required": true,
+      "source": "CRAN"
+    },
+    {
+      "version": "1.4.3",
+      "name": "futile.logger",
+      "purpose": "VennDiagram 依赖，并为它关掉 stdout 日志",
+      "required": true,
+      "source": "CRAN"
+    },
+    {
+      "version": "1.5.2",
+      "name": "ggVennDiagram",
+      "purpose": "Venn 图（6~7 组矩形布局）",
+      "required": true,
+      "source": "CRAN"
+    },
+    {
+      "version": "1.12",
+      "name": "venn",
+      "purpose": "ggVennDiagram 依赖（6 组以上的交集计算）",
+      "required": true,
+      "source": "CRAN"
+    },
+    {
+      "version": "3.5-7",
+      "name": "survival",
+      "purpose": "生存分析（Surv / survfit / survdiff）",
+      "required": true,
+      "source": "CRAN"
+    },
+    {
+      "version": "0.5.0",
+      "name": "survminer",
+      "purpose": "ggsurvplot（KM 曲线 + risk table）",
+      "required": true,
+      "source": "CRAN"
+    },
+    {
+      "version": "0.6.0",
+      "name": "ggpubr",
+      "purpose": "survminer 依赖 + theme_classic2",
+      "required": true,
+      "source": "CRAN"
+    },
+    {
+      "version": "0.7.2",
+      "name": "ggbeeswarm",
+      "purpose": "蜂群图（geom_quasirandom）",
+      "required": true,
+      "source": "CRAN"
+    },
+    {
+      "version": "3.2.0",
+      "name": "ggsci",
+      "purpose": "配色方案（lancet / jco / npg …）",
+      "required": true,
+      "source": "CRAN"
+    },
+    {
+      "name": "WGCNA",
+      "version": "1.73",
+      "purpose": "共表达网络：软阈值/邻接/TOM/动态切模块/模块特征向量",
+      "required": true,
+      "source": "Bioconductor"
+    },
+    {
+      "name": "dynamicTreeCut",
+      "version": "1.63-1",
+      "purpose": "cutreeDynamic 动态树剪切",
+      "required": true,
+      "source": "CRAN"
+    },
+    {
+      "name": "fastcluster",
+      "version": "1.2.6",
+      "purpose": "层次聚类快速实现",
+      "required": true,
+      "source": "CRAN"
+    },
+    {
+      "name": "preprocessCore",
+      "version": "1.64.0",
+      "purpose": "WGCNA 依赖的数组预处理",
+      "required": true,
+      "source": "Bioconductor"
+    },
+    {
+      "name": "impute",
+      "version": "1.76.0",
+      "purpose": "WGCNA 缺失值 kNN 填补",
+      "required": true,
+      "source": "Bioconductor"
+    },
+    {
+      "name": "gplots",
+      "version": "3.2.0",
+      "purpose": "TOMplot 网络热图与 plotMat",
+      "required": true,
+      "source": "CRAN"
+    },
+    {
+      "name": "Seurat",
+      "version": "5.2.1",
+      "purpose": "单细胞对象与降维聚类（NormalizeData / PCA / UMAP / tSNE / FindClusters）",
+      "required": false,
+      "source": "CRAN"
+    },
+    {
+      "name": "SeuratObject",
+      "version": "5.0.2",
+      "purpose": "Seurat 对象底层（Seurat 的依赖，单细胞模块必需）",
+      "required": false,
+      "source": "CRAN"
+    },
+    {
+      "name": "harmony",
+      "version": "1.2.3",
+      "purpose": "批次校正（IntegrateLayers 的 HarmonyIntegration）",
+      "required": false,
+      "source": "CRAN"
+    },
+    {
+      "name": "RhpcBLASctl",
+      "version": "0.23-42",
+      "purpose": "harmony 运行时依赖：它只在 harmony 的 Suggests 里，装 harmony 时不会被带上，缺了会在 harmony 调用时抛「不存在叫 RhpcBLASctl 这个名字的程辑包」",
+      "required": false,
+      "source": "CRAN"
+    }
+  ],
+  "generatedAt": "2026-11-13T16:51:00.477Z"
+}

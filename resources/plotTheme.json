@@ -1,0 +1,19 @@
+{
+  "palettes": {
+    "red-blue": ["#2166AC", "#F7F7F7", "#B2182B"],
+    "nature-npg": ["#4DBBD5", "#B0B7C3", "#E64B35"],
+    "nature-deep": ["#3C5488", "#C8CDD4", "#DC0000"],
+    "nature-soft": ["#00A087", "#C8CDD4", "#F39B7F"],
+    "viridis": ["#440154", "#21918C", "#FDE725"],
+    "set2": ["#66C2A5", "#FC8D62", "#8DA0CB", "#E78AC3", "#A6D854", "#FFD92F"],
+    "heat": ["#313695", "#ABD9E9", "#FFFFBF", "#FDAE61", "#A50026"]
+  },
+  "volcanoPresets": ["red-blue", "nature-npg", "nature-deep", "nature-soft", "viridis"],
+  "defaults": {
+    "fontSize": 12,
+    "widthIn": 8,
+    "heightIn": 6,
+    "dpi": 300,
+    "pointSize": 1.6
+  }
+}
