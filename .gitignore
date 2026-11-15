@@ -50,3 +50,10 @@ docs/DEV-NOTES.md
 
 # 开发辅助记录（含沟通过程与客户细节，不入公开仓库）
 .workbuddy-ai/
+
+# 开发辅助记录与临时产物
+.workbuddy-ai/
+.tmp/
+.tmp-r/
+.repro/
+Rplots.pdf
